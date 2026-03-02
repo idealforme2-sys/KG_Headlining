@@ -1,0 +1,1406 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030303] text-white scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KG Headliner | Premium Mobile Automotive Interiors</title>
+    <meta name="description"
+        content="KG Headliner Repair is a premium mobile automotive interior service in Florida specializing in headliner restoration and Alcantara upgrades.">
+
+    <!-- Luxury Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        luxury: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: '#D4AF37', // Luxury Metallic Gold
+                        dark: '#030303',
+                        surface: '#0a0a0a',
+                        surface2: '#121212',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Core Reset & Aesthetics */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            cursor: none;
+            background-color: #030303;
+        }
+
+        ::selection {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Bespoke Fluid Cursor */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        #cursor-follower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+        }
+
+        body.hover-active #cursor {
+            width: 0;
+            height: 0;
+        }
+
+        body.hover-active #cursor-follower {
+            width: 90px;
+            height: 90px;
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.05);
+            backdrop-filter: blur(2px);
+        }
+
+        body.drag-active #cursor {
+            width: 0;
+            height: 0;
+        }
+
+        body.drag-active #cursor-follower {
+            width: 70px;
+            height: 70px;
+            background: #D4AF37;
+            mix-blend-mode: difference;
+        }
+
+        body.drag-active #cursor-follower::after {
+            content: '< >';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* Cinematic Film Grain */
+        .noise {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            10% {
+                transform: translate(-5%, -10%);
+            }
+
+            30% {
+                transform: translate(3%, -15%);
+            }
+
+            50% {
+                transform: translate(12%, 9%);
+            }
+
+            70% {
+                transform: translate(9%, 4%);
+            }
+
+            90% {
+                transform: translate(-1%, 7%);
+            }
+        }
+
+        /* GSAP Typography Masking */
+        .line {
+            overflow: hidden;
+            padding-bottom: 0.1em;
+            margin-bottom: -0.1em;
+        }
+
+        /* Glassmorphism & UI */
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(5, 5, 5, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* Master Before/After Slider */
+        .ba-master {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            touch-action: none;
+        }
+
+        .ba-before {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            z-index: 2;
+            pointer-events: none;
+            filter: brightness(0.8) contrast(1.2) sepia(0.2);
+            transition: opacity 0.4s ease;
+        }
+
+        .ba-after {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: #D4AF37;
+            z-index: 3;
+            transform: translateX(-50%);
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .ba-handle-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: #D4AF37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+        }
+
+        /* Horizontal Scroll Specifics */
+        .horizontal-wrapper {
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .horizontal-container {
+            display: flex;
+            width: 500vw;
+            height: 100%;
+            will-change: transform;
+        }
+
+        .horizontal-panel {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5vw;
+        }
+
+        .panel-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: grayscale(50%);
+            transition: filter 0.5s, opacity 0.5s;
+        }
+
+        .horizontal-panel:hover .panel-img {
+            filter: grayscale(0%);
+            opacity: 0.6;
+        }
+
+        /* Masonry Feed */
+        .masonry {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        /* Kinetic Marquee */
+        .marquee-container {
+            display: flex;
+            width: 200%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes scroll-down {
+            0% {
+                transform: translateY(-120%);
+            }
+
+            100% {
+                transform: translateY(220%);
+            }
+        }
+
+        /* Map styling */
+        .map-container iframe {
+            filter: invert(90%) hue-rotate(180deg) grayscale(80%) contrast(120%);
+            border-radius: 1rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .map-container:hover iframe {
+            opacity: 1;
+        }
+
+        /* Premium Preloader */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.14), transparent 45%), #030303;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-inner {
+            text-align: center;
+            width: min(460px, 86vw);
+        }
+
+        .preloader-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.18em;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            text-transform: uppercase;
+            margin: 0;
+            color: #fff;
+        }
+
+        .preloader-sub {
+            margin: 0.7rem 0 1.4rem;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-size: 0.66rem;
+        }
+
+        .preloader-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.14);
+            overflow: hidden;
+            border-radius: 999px;
+        }
+
+        .preloader-bar-fill {
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), #D4AF37, rgba(212, 175, 55, 0.15));
+            animation: preloader-slide 1.5s ease-in-out infinite;
+        }
+
+        @keyframes preloader-slide {
+            0% {
+                transform: translateX(-120%);
+            }
+
+            50% {
+                transform: translateX(110%);
+            }
+
+            100% {
+                transform: translateX(260%);
+            }
+        }
+
+        @media (max-width: 1023px),
+        (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+
+            #cursor,
+            #cursor-follower {
+                display: none;
+            }
+
+            .horizontal-wrapper {
+                height: auto;
+            }
+
+            .horizontal-container {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .horizontal-panel {
+                width: 100%;
+                min-height: 70vh;
+                padding: 4rem 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .noise {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased font-sans selection:bg-brand selection:text-black">
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-inner flex flex-col items-center">
+            <img src="images_to_use/logo.svg" alt="KG Headliner Logo" class="w-24 h-24 mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+            <h2 class="preloader-logo">KG<span style="color:#D4AF37;">.</span> Headliner</h2>
+            <p class="preloader-sub">Premium Mobile Interiors</p>
+            <div class="preloader-bar">
+                <div class="preloader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="noise"></div>
+
+    <!-- Ultra-Premium Navbar -->
+    <nav class="fixed w-full top-0 z-50 px-6 py-6 transition-all duration-500" id="navbar">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
+            <div class="font-display font-bold text-2xl tracking-tighter uppercase magnetic hover-trigger"
+                data-strength="20">
+                KG<span class="text-brand">.</span>
+            </div>
+            <div
+                class="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/60">
+                <a href="#services" class="hover:text-brand transition-colors">Mastery</a>
+                <a href="#portfolio" class="hover:text-brand transition-colors">Transformations</a>
+                <a href="#social-proof" class="text-brand font-bold flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></div> Mobile Service
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="tel:+13213741176"
+                    class="hidden lg:flex items-center gap-2 text-xs font-display tracking-widest text-white/80 hover:text-brand transition-colors hover-trigger">
+                    <i data-lucide="phone" class="w-3 h-3 text-brand"></i> +1 321 374 1176
+                </a>
+                <a href="#contact"
+                    class="magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden"
+                    data-strength="30" aria-label="Book concierge appointment">
+                    <div
+                        class="absolute inset-0 bg-brand translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
+                    </div>
+                    <span
+                        class="relative z-10 text-[10px] tracking-[0.2em] uppercase group-hover:text-black transition-colors duration-300 font-bold">Book
+                        Concierge</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Cinematic Hero -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-dark">
+        <div class="absolute inset-0 z-0">
+            <img src="images_to_use/hero_image.jpg" class="w-full h-full object-cover opacity-30 hero-img scale-110"
+                alt="KG Headliner hero vehicle interior">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/80 via-transparent to-[#030303]"></div>
+            <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#030303]/90"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-16 flex flex-col items-center">
+            <div class="overflow-hidden mb-8">
+                <p
+                    class="hero-sub font-sans text-brand tracking-[0.5em] uppercase text-xs font-bold translate-y-full flex items-center gap-4 justify-center">
+                    <span class="w-8 h-[1px] bg-brand"></span>
+                    100% Mobile Operations
+                    <span class="w-8 h-[1px] bg-brand"></span>
+                </p>
+            </div>
+            <h1
+                class="hero-title font-display font-bold text-[11vw] md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl">
+                Restoring<br><span
+                    class="font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4">the</span>
+                Pinnacle.
+            </h1>
+            <div class="mt-12 overflow-hidden flex flex-col items-center">
+                <p
+                    class="hero-desc max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed translate-y-full">
+                    Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully
+                        mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades
+                    directly to your driveway or dealership.
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 hero-scroll opacity-0">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-white/40">Discover Mastery</span>
+            <div class="w-[1px] h-16 bg-white/10 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Horizontal Velocity Scrolling Services ("Mastery in Every Detail") -->
+    <section id="services" class="horizontal-wrapper bg-dark">
+        <div class="horizontal-container">
+
+            <!-- Intro Panel -->
+            <div class="horizontal-panel">
+                <div class="relative z-10 max-w-4xl w-full">
+                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-6 reveal-text">Our Expertise
+                    </p>
+                    <h2
+                        class="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] reveal-text">
+                        Mastery in <br><span class="font-luxury italic text-white/80 font-light lowercase">every</span>
+                        detail.
+                    </h2>
+                    <p class="mt-8 text-white/50 max-w-md font-light leading-relaxed reveal-text text-lg">Scroll
+                        horizontally to explore the uncompromising standards of our core services. Engineered to
+                        perfection, executed in your driveway.</p>
+                </div>
+            </div>
+
+            <!-- Service 1: Headliner Replacement -->
+            <div class="horizontal-panel">
+                <img src="images_to_use/factory_restoration.png" class="panel-img" alt="Headliner">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="relative z-10 w-full max-w-7xl flex flex-col justify-center h-full">
+                    <div
+                        class="text-[15vw] font-display font-black text-white/5 absolute -top-10 -left-10 select-none pointer-events-none">
+                        01</div>
+                    <h3 class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-6 text-white">
+                        Factory <br><span class="text-brand">Restoration.</span></h3>
+                    <p class="text-white/60 max-w-xl text-lg font-light leading-relaxed mb-8">We surgically extract the
+                        shell, strip the degraded, toxic structural foam down to the core fiberglass, and bond premium
+                        OEM fabrics using high-temp industrial adhesives.</p>
+                    <ul class="space-y-4 text-sm tracking-widest uppercase font-medium text-white/40">
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand w-4 h-4"></i> OEM
+                            Fabric Matching</li>
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand w-4 h-4"></i>
+                            Lifetime Structural Bond</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Service 2: Alcantara Upgrades -->
+            <div class="horizontal-panel">
+                <img src="images_to_use/alcantara_upgrade.png" class="panel-img" alt="Alcantara">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="relative z-10 w-full max-w-7xl flex flex-col justify-center h-full">
+                    <div
+                        class="text-[15vw] font-display font-black text-white/5 absolute -top-10 -left-10 select-none pointer-events-none">
+                        02</div>
+                    <h3 class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-6 text-white">
+                        Alcantara <br><span class="text-brand">Upgrades.</span></h3>
+                    <p class="text-white/60 max-w-xl text-lg font-light leading-relaxed mb-8">Elevate your cabin to
+                        supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a
+                        track-focused, luxurious matte texture.</p>
+                    <ul class="space-y-4 text-sm tracking-widest uppercase font-medium text-white/40">
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand w-4 h-4"></i>
+                            Genuine Italian Suede</li>
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand w-4 h-4"></i>
+                            Exotic Aesthetics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Service 3: Pillar & Sunroof Integration -->
+            <div class="horizontal-panel">
+                <img src="images_to_use/pillars_sunvisor.png" class="panel-img" alt="Pillars">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="relative z-10 w-full max-w-7xl flex flex-col justify-center h-full">
+                    <div
+                        class="text-[15vw] font-display font-black text-white/5 absolute -top-10 -left-10 select-none pointer-events-none">
+                        03</div>
+                    <h3 class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-6 text-white">
+                        Pillars & <br><span class="text-brand">Sun Visors.</span></h3>
+                    <p class="text-white/60 max-w-xl text-lg font-light leading-relaxed mb-8">A holistic restoration. We
+                        ensure your A, B, and C pillars, along with complex sunroof sliding shades and visors, are
+                        meticulously hand-stitched and recovered to match.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Overhauled Interactive Before/After Gallery -->
+    <section id="portfolio" class="py-32 px-4 md:px-12 w-full bg-surface relative">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text">
+                        Witness the <br><span class="text-brand">Transformation.</span></h2>
+                    <p
+                        class="text-white/40 mt-4 font-light text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
+                        <i data-lucide="mouse-pointer-2" class="w-4 h-4 text-brand"></i> Drag to interact
+                    </p>
+                </div>
+                <p class="text-white/50 max-w-sm font-light leading-relaxed reveal-text md:text-right">
+                    Select a vehicle below to view the meticulous restoration process. We turn ruined interiors back to
+                    showroom perfection.
+                </p>
+            </div>
+
+            <!-- Master Slider Container -->
+            <div class="ba-master cursor-ew-resize hover-trigger mb-10" data-cursor="drag" id="ba-container">
+                <img src="images_to_use/Nissan_after.png" alt="Restored" class="ba-after select-none" id="master-after">
+                <img src="images_to_use/Nissan_before.png" alt="Damaged" class="ba-before select-none"
+                    id="master-before">
+
+                <div class="ba-handle" id="ba-handle">
+                    <div class="ba-handle-btn"><i data-lucide="move-horizontal" class="w-6 h-6"></i></div>
+                </div>
+
+                <div
+                    class="absolute bottom-6 left-6 z-10 bg-black/70 backdrop-blur-md px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10 shadow-lg">
+                    Damaged / Sagging</div>
+                <div
+                    class="absolute bottom-6 right-6 z-10 bg-brand text-black px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    KG Restored</div>
+            </div>
+
+            <!-- Thumbnail Selector Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="ba-thumbnails">
+                <div class="glass-panel p-4 rounded-xl cursor-pointer hover-trigger transition-all border-brand/50 thumbnail-active"
+                    data-before="images_to_use/Nissan_before.png" data-after="images_to_use/Nissan_after.png">
+                    <div class="text-[10px] text-brand tracking-widest uppercase mb-1">OEM Restoration</div>
+                    <div class="font-bold text-sm">Nissan</div>
+                </div>
+                <div class="glass-panel p-4 rounded-xl cursor-pointer hover-trigger transition-all border-transparent hover:border-white/30"
+                    data-before="images_to_use/chevrolet_before.png" data-after="images_to_use/chevrolet_after.png">
+                    <div class="text-[10px] text-brand tracking-widest uppercase mb-1">Alcantara Upgrade</div>
+                    <div class="font-bold text-sm">Chevrolet</div>
+                </div>
+                <div class="glass-panel p-4 rounded-xl cursor-pointer hover-trigger transition-all border-transparent hover:border-white/30"
+                    data-before="images_to_use/bmw_before.png" data-after="images_to_use/bmw_after.png">
+                    <div class="text-[10px] text-brand tracking-widest uppercase mb-1">Pillar & Sunroof</div>
+                    <div class="font-bold text-sm">BMW M5</div>
+                </div>
+                <div class="glass-panel p-4 rounded-xl cursor-pointer hover-trigger transition-all border-transparent hover:border-white/30"
+                    data-before="images_to_use/Ford_before.png" data-after="images_to_use/Ford_after.png">
+                    <div class="text-[10px] text-brand tracking-widest uppercase mb-1">Starlight Install</div>
+                    <div class="font-bold text-sm">Ford</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Kinetic Mobile Marquee Break -->
+    <section class="py-8 bg-brand overflow-hidden relative rotate-[-1deg] scale-105 shadow-2xl z-20">
+        <div class="marquee-container flex whitespace-nowrap">
+            <!-- Repeated text block for infinite pure CSS scroll -->
+            <div
+                class="flex items-center gap-8 px-4 font-display font-black text-5xl md:text-7xl text-black uppercase tracking-tighter w-max">
+                WE ARE 100% MOBILE <span class="text-white/50 text-3xl">&bull;</span> WE COME TO YOU <span
+                    class="text-white/50 text-3xl">&bull;</span> HOME OR OFFICE <span
+                    class="text-white/50 text-3xl">&bull;</span>
+                WE ARE 100% MOBILE <span class="text-white/50 text-3xl">&bull;</span> WE COME TO YOU <span
+                    class="text-white/50 text-3xl">&bull;</span> HOME OR OFFICE <span
+                    class="text-white/50 text-3xl">&bull;</span>
+                WE ARE 100% MOBILE <span class="text-white/50 text-3xl">&bull;</span> WE COME TO YOU <span
+                    class="text-white/50 text-3xl">&bull;</span> HOME OR OFFICE <span
+                    class="text-white/50 text-3xl">&bull;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Social Feed, Videos & Google Reviews -->
+    <section id="social-proof" class="py-32 px-4 md:px-12 w-full bg-dark relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Header -->
+            <div class="text-center mb-20">
+                <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text">Real Results. Real
+                    Convenience.</p>
+                <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text">The
+                    Studio Feed <br>& <span
+                        class="font-luxury italic text-white/80 font-light lowercase">verified</span> Excellence.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                <!-- Left: Masonry Social Media (TikTok/IG) -->
+                <div class="lg:col-span-7 masonry">
+
+                    <!-- Post 1: Video/TikTok -->
+                    <div class="masonry-item group cursor-pointer hover-trigger glass-panel p-2">
+                        <div class="relative rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop"
+                                class="w-full h-auto transform transition-transform duration-700 group-hover:scale-110"
+                                alt="TikTok Video">
+                            <div
+                                class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all flex flex-col justify-between p-4">
+                                <div
+                                    class="self-end bg-black/60 backdrop-blur-md rounded-full p-2 border border-white/10">
+                                    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.23-.9 4.45-2.4 6.08-1.5 1.6-3.6 2.57-5.83 2.76-2.22.18-4.5-.18-6.38-1.3-1.87-1.1-3.23-2.9-3.79-5.02-.55-2.08-.27-4.32.76-6.19 1.02-1.85 2.73-3.24 4.7-3.9 1.95-.65 4.1-.64 6.04-.04.03 1.39.01 2.77.02 4.16-1.04-.4-2.2-.44-3.25-.13-1.05.3-1.95.96-2.52 1.87-.57.89-.78 2.01-.58 3.04.19 1.02.79 1.92 1.63 2.51.83.58 1.9.82 2.9.68.99-.13 1.9-.66 2.52-1.44.62-.77.95-1.78.93-2.79-.04-3.48-.02-6.96-.02-10.43-1.03.02-2.06.02-3.08.02-.02-1.4-.01-2.81-.02-4.21Z" />
+                                    </svg>
+                                </div>
+                                <div
+                                    class="w-12 h-12 bg-brand/90 rounded-full flex items-center justify-center self-center scale-90 group-hover:scale-110 transition-transform shadow-lg shadow-brand/20">
+                                    <i data-lucide="play" class="w-5 h-5 text-black ml-1"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold">100% Mobile Starlight Install ðŸŒŒ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2: Image/IG -->
+                    <div class="masonry-item group cursor-pointer hover-trigger glass-panel p-2">
+                        <div class="relative rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606813293883-20786f671754?q=80&w=800&auto=format&fit=crop"
+                                class="w-full h-auto transform transition-transform duration-700 group-hover:scale-110"
+                                alt="Instagram Post">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                                <i data-lucide="instagram" class="w-4 h-4 text-white absolute top-4 right-4"></i>
+                                <p class="text-xs font-bold">Alcantara wrapping in the customer's driveway. Absolute
+                                    perfection. ðŸ”¥</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3: Image/IG -->
+                    <div class="masonry-item group cursor-pointer hover-trigger glass-panel p-2">
+                        <div class="relative rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop"
+                                class="w-full h-auto transform transition-transform duration-700 group-hover:scale-110"
+                                alt="Instagram Post">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                                <i data-lucide="instagram" class="w-4 h-4 text-white absolute top-4 right-4"></i>
+                                <p class="text-xs font-bold">Porsche 911 GT3 OEM Match.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Google Reviews Column -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    <!-- Google Trust Badge -->
+                    <div
+                        class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-6 glass hover-trigger">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2.5">
+                            <svg viewBox="0 0 24 24" class="w-full h-full">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Excellent</h3>
+                            <div class="flex gap-1 mt-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i>
+                            </div>
+                            <p class="text-xs text-white/50 mt-1">Based on Google Reviews</p>
+                        </div>
+                    </div>
+
+                    <!-- Review Cards -->
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    M</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Michael R.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Mobile Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"The fact that they came to
+                            my office and handled my Range Rover in the parking garage is unbelievable. The work is
+                            flawless, looked better than rolling off the showroom floor."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    S</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Sarah T.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">At-Home Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"Absolute professionals. They
+                            pulled into my driveway, carefully disassembled the pillars without breaking a clip, and the
+                            new material is a perfect OEM match."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    J</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">James L.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Alcantara Upgrade
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"I didn't have time to drop
+                            my car at a shop for 3 days. KG came to me. The Italian Alcantara upgrade completely
+                            transformed my cabin. 10/10."</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. High-End Contact & Mobile Service Concierge -->
+    <section id="contact" class="py-32 px-6 md:px-12 bg-surface2 relative overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                <!-- Info Column -->
+                <div class="lg:col-span-5 flex flex-col justify-center">
+                    <p
+                        class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text flex items-center gap-2">
+                        <i data-lucide="truck" class="w-4 h-4"></i> Mobile Dispatch</p>
+                    <h2
+                        class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-12 reveal-text">
+                        Book Your <br><span
+                            class="font-luxury italic text-white/80 font-light lowercase">appointment.</span>
+                    </h2>
+
+                    <div class="space-y-10">
+                        <!-- Contact Block -->
+                        <div class="flex items-start gap-6 reveal-text group">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                                <i data-lucide="phone-call" class="w-5 h-5 text-brand"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2">Direct Line</h4>
+                                <a href="tel:+13213741176"
+                                    class="text-2xl font-display font-bold hover:text-brand transition-colors">+1 321
+                                    374 1176</a>
+                            </div>
+                        </div>
+
+                        <!-- Hours Block -->
+                        <div class="flex items-start gap-6 reveal-text group">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                                <i data-lucide="clock" class="w-5 h-5 text-brand"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2">Operating Hours</h4>
+                                <div class="text-lg font-light leading-relaxed">
+                                    <span class="block">Monday â€“ Sunday</span>
+                                    <span class="font-bold text-brand mt-1 block">08:00 AM â€“ 08:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Block -->
+                        <div class="flex items-start gap-6 reveal-text group">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                                <i data-lucide="map" class="w-5 h-5 text-brand"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2">Service Area Base</h4>
+                                <div class="text-lg font-light leading-relaxed block hover-trigger">
+                                    Based in Kissimmee, FL<br>
+                                    <span class="text-brand text-sm font-bold block mt-1">We dispatch directly to
+                                        you.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed Column -->
+                <div
+                    class="lg:col-span-7 h-[500px] lg:h-auto rounded-2xl overflow-hidden glass p-2 hover-trigger map-container relative">
+                    <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-black/40">
+                        <div
+                            class="bg-black/80 backdrop-blur-md border border-brand/50 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl">
+                            <div class="w-2 h-2 rounded-full bg-brand animate-ping"></div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-brand">Dispatch Zone
+                                Active</span>
+                        </div>
+                    </div>
+                    <iframe src="https://www.google.com/maps?q=Kg+Headliner+Repair,+Kissimmee,+FL&z=15&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-dark border-t border-white/10 text-center relative z-10">
+        <h2
+            class="font-display text-black/20 font-black text-[15vw] leading-[0.7] tracking-tighter m-0 uppercase footer-title overflow-hidden pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+            MOBILE.
+        </h2>
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6 gap-4">
+            <div class="text-white/40 text-xs tracking-widest uppercase font-bold">&copy; 2026 KG Headliner Repair</div>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/kg_headliner/" target="_blank" rel="noopener noreferrer"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="instagram" class="w-4 h-4 inline mb-1"></i> Instagram</a>
+                <a href="https://www.facebook.com/people/KG-Headliner-Replace/100095066636657/" target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="facebook" class="w-4 h-4 inline mb-1"></i> Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+    <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isDesktopPointer = window.matchMedia('(pointer: fine)').matches || window.matchMedia('(hover: hover)').matches;
+        const hasGSAP = typeof window.gsap !== 'undefined';
+        const hasScrollTrigger = typeof window.ScrollTrigger !== 'undefined';
+        const hasLenis = typeof window.Lenis !== 'undefined';
+        const hasSplitType = typeof window.SplitType !== 'undefined';
+
+        // Initialize Icons
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
+
+        // 1. Smooth scrolling
+        let lenis = null;
+        if (hasLenis && isDesktopPointer) {
+            lenis = new window.Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+            });
+        }
+
+        // GSAP connection
+        if (hasGSAP && hasScrollTrigger) {
+            window.gsap.registerPlugin(window.ScrollTrigger);
+            if (lenis) {
+                lenis.on('scroll', window.ScrollTrigger.update);
+                window.gsap.ticker.add((time) => {
+                    lenis.raf(time * 1000);
+                });
+            }
+            window.gsap.ticker.lagSmoothing(0);
+        }
+
+        // Navbar blur logic
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (!nav) {
+                return;
+            }
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'bg-dark/80', 'backdrop-blur-md');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.add('py-6');
+                nav.classList.remove('py-2', 'bg-dark/80', 'backdrop-blur-md');
+            }
+        });
+
+        // 2. Custom cursor (desktop only)
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        const hoverTriggers = document.querySelectorAll('.hover-trigger');
+        if (isDesktopPointer && cursor && follower) {
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, followerX = 0, followerY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            const tick = () => {
+                cursorX += (mouseX - cursorX) * 0.5;
+                cursorY += (mouseY - cursorY) * 0.5;
+                followerX += (mouseX - followerX) * 0.15;
+                followerY += (mouseY - followerY) * 0.15;
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+                follower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+
+            hoverTriggers.forEach((trigger) => {
+                trigger.addEventListener('mouseenter', () => {
+                    if (trigger.dataset.cursor === 'drag') {
+                        document.body.classList.add('drag-active');
+                    } else {
+                        document.body.classList.add('hover-active');
+                    }
+                });
+                trigger.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('hover-active', 'drag-active');
+                });
+            });
+        }
+
+        // 3. Magnetic buttons
+        if (hasGSAP) {
+            document.querySelectorAll('.magnetic').forEach((elem) => {
+                elem.addEventListener('mousemove', (e) => {
+                    const position = elem.getBoundingClientRect();
+                    const x = e.clientX - position.left - position.width / 2;
+                    const y = e.clientY - position.top - position.height / 2;
+                    const strength = Number(elem.dataset.strength || 20);
+                    window.gsap.to(elem, {
+                        x: (x / position.width) * strength,
+                        y: (y / position.height) * strength,
+                        duration: 1,
+                        ease: 'power4.out',
+                    });
+                });
+                elem.addEventListener('mouseleave', () => {
+                    window.gsap.to(elem, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)' });
+                });
+            });
+        }
+
+        // 4. Horizontal GSAP section (desktop only)
+        if (hasGSAP && hasScrollTrigger && isDesktopPointer) {
+            const horizontalSections = window.gsap.utils.toArray('.horizontal-panel');
+            if (horizontalSections.length > 1) {
+                window.gsap.to(horizontalSections, {
+                    xPercent: -100 * (horizontalSections.length - 1),
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.horizontal-wrapper',
+                        pin: true,
+                        scrub: 1,
+                        snap: 1 / (horizontalSections.length - 1),
+                        invalidateOnRefresh: true,
+                        anticipatePin: 1,
+                        end: () => '+=' + document.querySelector('.horizontal-wrapper').offsetWidth * (horizontalSections.length - 1),
+                    },
+                });
+                window.addEventListener('resize', () => window.ScrollTrigger.refresh());
+            }
+        }
+
+        // 5. Before/After slider interaction
+        const slider = document.getElementById('ba-container');
+        const beforeImg = document.getElementById('master-before');
+        const afterImg = document.getElementById('master-after');
+        const handle = document.getElementById('ba-handle');
+        const thumbnails = document.querySelectorAll('#ba-thumbnails .glass-panel');
+        let currentPercent = 50;
+
+        function applySlider(percent) {
+            if (!beforeImg || !handle) {
+                return;
+            }
+            currentPercent = Math.max(0, Math.min(percent, 100));
+            beforeImg.style.clipPath = `polygon(0 0, ${currentPercent}% 0, ${currentPercent}% 100%, 0 100%)`;
+            handle.style.left = `${currentPercent}%`;
+        }
+
+        function slideImage(xPos) {
+            if (!slider) {
+                return;
+            }
+            const rect = slider.getBoundingClientRect();
+            const x = xPos - rect.left;
+            const percent = (x / rect.width) * 100;
+            applySlider(percent);
+        }
+
+        if (slider) {
+            slider.setAttribute('tabindex', '0');
+            let isPointerDown = false;
+            slider.addEventListener('pointerdown', (e) => {
+                isPointerDown = true;
+                slider.setPointerCapture(e.pointerId);
+                slideImage(e.clientX);
+            });
+            slider.addEventListener('pointermove', (e) => {
+                if (isPointerDown || e.pointerType === 'mouse') {
+                    slideImage(e.clientX);
+                }
+            });
+            slider.addEventListener('pointerup', () => {
+                isPointerDown = false;
+            });
+            slider.addEventListener('pointercancel', () => {
+                isPointerDown = false;
+            });
+            slider.addEventListener('mousemove', (e) => slideImage(e.clientX));
+            slider.addEventListener('touchmove', (e) => slideImage(e.touches[0].clientX), { passive: true });
+            slider.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    applySlider(currentPercent - 5);
+                }
+                if (e.key === 'ArrowRight') {
+                    applySlider(currentPercent + 5);
+                }
+            });
+        }
+
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                thumbnails.forEach((t) => {
+                    t.classList.remove('border-brand/50', 'thumbnail-active');
+                    t.classList.add('border-transparent');
+                });
+                thumb.classList.remove('border-transparent');
+                thumb.classList.add('border-brand/50', 'thumbnail-active');
+
+                const swapImages = () => {
+                    beforeImg.src = thumb.dataset.before;
+                    afterImg.src = thumb.dataset.after;
+                    applySlider(50);
+                };
+
+                if (hasGSAP) {
+                    window.gsap.to([beforeImg, afterImg], {
+                        opacity: 0,
+                        duration: 0.2,
+                        onComplete: () => {
+                            swapImages();
+                            afterImg.onload = () => window.gsap.to([beforeImg, afterImg], { opacity: 1, duration: 0.4 });
+                        },
+                    });
+                } else {
+                    swapImages();
+                }
+            });
+        });
+
+        // 6. SplitType and reveals
+        const showStaticFallback = () => {
+            document.querySelectorAll('.hero-sub, .hero-desc').forEach((el) => {
+                el.classList.remove('translate-y-full');
+                el.style.opacity = '1';
+            });
+            const scrollHint = document.querySelector('.hero-scroll');
+            if (scrollHint) {
+                scrollHint.classList.remove('opacity-0');
+                scrollHint.style.opacity = '1';
+            }
+        };
+
+        const hidePreloader = () => {
+            const preloader = document.getElementById('preloader');
+            if (!preloader) {
+                return;
+            }
+            preloader.classList.add('is-hidden');
+            window.setTimeout(() => {
+                preloader.remove();
+            }, 900);
+        };
+
+        window.addEventListener('load', () => {
+            hidePreloader();
+            if (!(hasGSAP && hasSplitType) || prefersReducedMotion) {
+                showStaticFallback();
+                return;
+            }
+
+            const heroTitle = new window.SplitType('.hero-title', { types: 'chars, words' });
+            const tl = window.gsap.timeline();
+            tl.fromTo('.hero-img', { scale: 1.3, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 2.5, ease: 'power4.out' })
+                .fromTo(heroTitle.chars, { y: 100, opacity: 0, rotateX: -90 }, { y: 0, opacity: 1, rotateX: 0, stagger: 0.03, duration: 1.5, ease: 'back.out(1.5)' }, '-=2')
+                .to('.hero-sub, .hero-desc', { y: 0, opacity: 1, duration: 1.5, ease: 'power4.out', stagger: 0.2 }, '-=1.5')
+                .to('.hero-scroll', { opacity: 1, duration: 1 }, '-=1');
+
+            document.querySelectorAll('.reveal-text').forEach((text) => {
+                const splitText = new window.SplitType(text, { types: 'lines, words' });
+                splitText.lines.forEach((line) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('line');
+                    line.parentNode.insertBefore(wrapper, line);
+                    wrapper.appendChild(line);
+                });
+                window.gsap.fromTo(
+                    splitText.words,
+                    { y: '100%', opacity: 0 },
+                    {
+                        y: '0%',
+                        opacity: 1,
+                        stagger: 0.02,
+                        duration: 1,
+                        ease: 'power4.out',
+                        scrollTrigger: hasScrollTrigger ? { trigger: text, start: 'top 90%' } : undefined,
+                    }
+                );
+            });
+        });
+    </script>
+
+    <!-- Text Animation & Translation Scripts -->
+    <script>
+        // High-End Text Animations
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof window.SplitType !== 'undefined' && typeof window.gsap !== 'undefined') {
+                const subText = new SplitType('.premium-text-animate', { types: 'chars' });
+                const titleText = new SplitType('.premium-title-animate', { types: 'words, chars' });
+                
+                // Preloader hide animation sequence
+                setTimeout(() => {
+                    const preloader = document.getElementById('preloader');
+                    window.gsap.to(preloader, {
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            preloader.style.display = 'none';
+                            
+                            // Trigger Hero Animations
+                            const tl = window.gsap.timeline();
+                            tl.fromTo('.hero-line', { width: 0, opacity: 0 }, { width: 32, opacity: 1, duration: 1, ease: "power3.out" })
+                              .fromTo(subText.chars, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: "back.out(1.7)" }, "-=0.5")
+                              .fromTo(titleText.words, { y: 100, opacity: 0, rotateX: -45 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.2, stagger: 0.1, ease: "expo.out" }, "-=0.8")
+                              .fromTo('.hero-desc', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8");
+                        }
+                    });
+                }, 1500);
+            } else {
+                // Fallback if scripts are missing
+                document.getElementById('preloader').classList.add('is-hidden');
+            }
+        });
+
+        // Basic Dictionary Translation System
+        const translations = {
+            "en": {
+                "nav_mastery": "Mastery", "nav_transformations": "Transformations", "nav_mobile": "Mobile Service", "nav_book": "Book Concierge",
+                "hero_sub": "100% Mobile Operations", "hero_title": "Restoring<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">the</span> Pinnacle.", "hero_desc": "Your time is a luxury. We are Florida's premier fully mobile studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.", "hero_scroll": "Discover Mastery",
+                "expertise_sub": "Our Expertise", "expertise_title": "Mastery in <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">every</span> detail.", "expertise_desc": "Scroll horizontally to explore the uncompromising standards of our core services. Engineered to perfection, executed in your driveway.",
+                "factory_title": "Factory <br><span class=\"text-brand\">Restoration.</span>", "factory_desc": "We surgically extract the shell, strip the degraded, toxic structural foam down to the core fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.", "alcantara_title": "Alcantara <br><span class=\"text-brand\">Upgrades.</span>", "alcantara_desc": "Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a track-focused, luxurious matte texture.", "pillars_title": "Pillars & <br><span class=\"text-brand\">Sun Visors.</span>", "pillars_desc": "A holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding shades and visors, are meticulously hand-stitched and recovered to match.",
+                "portfolio_title": "Witness the <br><span class=\"text-brand\">Transformation.</span>", "portfolio_desc": "Select a vehicle below to view the meticulous restoration process. We turn ruined interiors back to showroom perfection.",
+                "marquee": "WE ARE 100% MOBILE <span class=\"text-white/50 text-3xl\">&bull;</span> WE COME TO YOU <span class=\"text-white/50 text-3xl\">&bull;</span> HOME OR OFFICE <span class=\"text-white/50 text-3xl\">&bull;</span>",
+                "social_sub": "Real Results. Real Convenience.", "social_title": "The Studio Feed <br>& <span class=\"font-luxury italic text-white/80 font-light lowercase\">verified</span> Excellence.",
+                "contact_sub": "Mobile Dispatch", "contact_title": "Book Your <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">appointment.</span>"
+            },
+            "es": {
+                "nav_mastery": "Maestría", "nav_transformations": "Transformaciones", "nav_mobile": "Servicio Móvil", "nav_book": "Reserva Ahora",
+                "hero_sub": "Operaciones 100% Móviles", "hero_title": "Restaurando<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">el</span> Pináculo.", "hero_desc": "Tu tiempo es un lujo. Somos el principal estudio completamente móvil de Florida, llevando la restauración perfecta de techos y mejoras de Alcantara directamente a tu entrada o concesionario.", "hero_scroll": "Descubre la Maestría",
+                "expertise_sub": "Nuestra Experiencia", "expertise_title": "Maestría en <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">cada</span> detalle.", "expertise_desc": "Desplázate horizontalmente para explorar los estándares intransigentes de nuestros servicios principales. Diseñados a la perfección, ejecutados en tu entrada.",
+                "factory_title": "Restauración <br><span class=\"text-brand\">de Fábrica.</span>", "factory_desc": "Extraemos quirúrgicamente la carcasa, eliminamos la espuma estructural degradada hasta el núcleo de fibra de vidrio, y unimos telas OEM premium usando adhesivos industriales de alta temperatura.", "alcantara_title": "Mejoras en <br><span class=\"text-brand\">Alcantara.</span>", "alcantara_desc": "Eleva tu cabina a los estándares de un superdeportivo. Importamos Alcantara italiano genuino para forrar tu techo, proporcionando una textura mate lujosa enfocada en la pista.", "pillars_title": "Pilares y <br><span class=\"text-brand\">Viseras.</span>", "pillars_desc": "Una restauración integral. Nos aseguramos de que tus pilares A, B y C, junto con las complejas persianas solares y viseras, sean meticulosamente cosidos a mano y forrados para combinar.",
+                "portfolio_title": "Testigo de la <br><span class=\"text-brand\">Transformación.</span>", "portfolio_desc": "Selecciona un vehículo a continuación para ver el proceso de restauración minucioso. Devolvemos interiores arruinados a la perfección de sala de exposición.",
+                "marquee": "SOMOS 100% MÓVILES <span class=\"text-white/50 text-3xl\">&bull;</span> VAMOS A TI <span class=\"text-white/50 text-3xl\">&bull;</span> CASA U OFICINA <span class=\"text-white/50 text-3xl\">&bull;</span>",
+                "social_sub": "Resultados Reales.", "social_title": "Nuestro Feed <br>& Excelencia <span class=\"font-luxury italic text-white/80 font-light lowercase\">verificada</span>.",
+                "contact_sub": "Despacho Móvil", "contact_title": "Reserva Tu <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">cita.</span>"
+            }
+        };
+
+        const updateLanguage = (lang) => {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.replace('text-white', 'text-white/40'));
+            document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.replace('text-white/40', 'text-white');
+            
+            // Re-apply SplitType after text change if it's the hero
+            const sub = document.querySelector('.premium-text-animate');
+            const title = document.querySelector('.premium-title-animate');
+            
+            if (sub && title && typeof window.SplitType !== 'undefined') {
+                sub.innerHTML = translations[lang]['hero_sub'];
+                title.innerHTML = translations[lang]['hero_title'];
+                new SplitType('.premium-text-animate', { types: 'chars' });
+                new SplitType('.premium-title-animate', { types: 'words, chars' });
+            }
+
+            // A basic search and replace could be done by ID or classes
+            const replaceMap = {
+                'a[href="#services"]': 'nav_mastery',
+                'a[href="#portfolio"]': 'nav_transformations',
+                '.hero-desc': 'hero_desc',
+                '#services .reveal-text:nth-of-type(1)': 'expertise_sub',
+                '#services h2': 'expertise_title',
+                '#services .reveal-text:nth-of-type(3)': 'expertise_desc',
+            };
+            
+            for (const [selector, key] of Object.entries(replaceMap)) {
+                const el = document.querySelector(selector);
+                if (el) el.innerHTML = translations[lang][key];
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => updateLanguage(e.target.dataset.lang));
+        });
+    </script>
+</body>
+
+</html>
