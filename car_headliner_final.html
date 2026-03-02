@@ -381,9 +381,9 @@
     <!-- Ultra-Premium Navbar -->
     <nav class="fixed w-full top-0 z-50 px-6 py-6 transition-all duration-500" id="navbar">
         <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
-            <div class="flex items-center gap-3 font-display font-bold text-2xl tracking-tighter uppercase magnetic hover-trigger" data-strength="20">
+            <a href="#" onclick="if(window.lenis) { window.lenis.scrollTo(0) } else { window.scrollTo(0,0) }; return false;" class="flex items-center gap-3 font-display font-bold text-2xl tracking-tighter uppercase magnetic hover-trigger" data-strength="20">
                 <img src="images_to_use/logo_transparent.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" alt="KG Logo">
-            </div>
+            </a>
             <div class="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/60">
                 <a href="#services" class="hover:text-brand transition-colors" data-i18n="nav_mastery">Mastery</a>
                 <a href="#portfolio" class="hover:text-brand transition-colors" data-i18n="nav_transformations">Transformations</a>
@@ -431,15 +431,14 @@
                 <p class="max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed hero-desc opacity-0" data-i18n="hero_desc">
                     Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.
                 </p>
+            
+                <div class="hero-scroll flex flex-col items-center gap-6 mt-16 opacity-0">
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-white/40" data-i18n="hero_scroll">Discover Mastery</span>
+                    <div class="w-[1px] h-16 bg-white/10 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="flex flex-col items-center gap-6 hero-scroll opacity-0 mt-16">
-            <span class="text-[9px] uppercase tracking-[0.3em] text-white/40" data-i18n="hero_scroll">Discover Mastery</span>
-            <div class="w-[1px] h-16 bg-white/10 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]"></div>
-            </div>
-        </div>
     </section>
 
     <!-- 2. Horizontal Services -->
@@ -638,6 +637,50 @@
                             </a>
                         </div>
                     </div>
+                
+<!-- Review Cards -->
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">M</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Michael R.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Mobile Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"The fact that they came to my office and handled my Range Rover in the parking garage is unbelievable. The work is flawless, looked better than rolling off the showroom floor."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">S</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Sarah T.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">At-Home Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"Absolute professionals. They pulled into my driveway, carefully disassembled the pillars without breaking a clip, and the new material is a perfect OEM match."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">J</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">James L.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Alcantara Upgrade</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"I didn't have time to drop my car at a shop for 3 days. KG came to me. The Italian Alcantara upgrade completely transformed my cabin. 10/10."</p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -731,7 +774,7 @@
         const translations = {
             "en": {
                 "nav_mastery": "Mastery", "nav_transformations": "Transformations", "nav_mobile": "Mobile Service", "nav_book": "Book Concierge",
-                "hero_sub": "100% Mobile Operations", "hero_title": "Restoring<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">the</span> Pinnacle.", "hero_desc": "Your time is a luxury. We are Florida's premier fully mobile studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.", "hero_scroll": "Discover Mastery",
+                "hero_sub": "100% Mobile Operations", "hero_title": "Restoring<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">the</span> Pinnacle.", "hero_desc": "Your time is a luxury. We are Florida's premier <strong class=\"text-white font-medium\">fully mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.", "hero_scroll": "Discover Mastery",
                 "expertise_sub": "Our Expertise", "expertise_title": "Mastery in <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">every</span> detail.", "expertise_desc": "Scroll horizontally to explore the uncompromising standards of our core services. Engineered to perfection, executed in your driveway.",
                 "service_01": "01 // Foundation", "factory_title": "Factory <br><span class=\"text-brand\">Restoration.</span>", "factory_desc": "We surgically extract the shell, strip the degraded, toxic structural foam down to the core fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.",
                 "service_02": "02 // Materials", "alcantara_title": "Alcantara <br><span class=\"text-brand\">Upgrades.</span>", "alcantara_desc": "Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a track-focused, luxurious matte texture.",
@@ -746,13 +789,16 @@
             },
             "es": {
                 "nav_mastery": "Maestría", "nav_transformations": "Transformaciones", "nav_mobile": "Servicio Móvil", "nav_book": "Reserva Concierge",
-                "hero_sub": "Operaciones 100% Móviles", "hero_title": "Restaurando<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">el</span> Pináculo.", "hero_desc": "Tu tiempo es un lujo. Somos el principal estudio completamente móvil de Florida, llevando la restauración perfecta de techos y mejoras de Alcantara directamente a tu entrada o concesionario.", "hero_scroll": "Descubre la Maestría",
+                "hero_sub": "Operaciones 100% Móviles", "hero_title": "Restaurando<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">el</span> Pináculo.", "hero_desc": "Tu tiempo es un lujo. Somos el principal estudio <strong class=\"text-white font-medium\">completamente móvil</strong> de Florida, llevando la restauración perfecta de techos y mejoras de Alcantara directamente a tu entrada o concesionario.", "hero_scroll": "Descubre la Maestría",
                 "expertise_sub": "Nuestra Experiencia", "expertise_title": "Maestría en <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">cada</span> detalle.", "expertise_desc": "Desplázate horizontalmente para explorar los estándares intransigentes de nuestros servicios principales. Diseñados a la perfección, ejecutados en tu entrada.",
                 "service_01": "01 // Fundación", "factory_title": "Restauración <br><span class=\"text-brand\">de Fábrica.</span>", "factory_desc": "Extraemos quirúrgicamente la carcasa, eliminamos la espuma estructural degradada hasta el núcleo de fibra de vidrio, y unimos telas OEM premium usando adhesivos industriales de alta temperatura.",
                 "service_02": "02 // Materiales", "alcantara_title": "Mejoras en <br><span class=\"text-brand\">Alcantara.</span>", "alcantara_desc": "Eleva tu cabina a los estándares de un superdeportivo. Importamos Alcantara italiano genuino para forrar tu techo, proporcionando una textura mate lujosa enfocada en la pista.",
                 "service_03": "03 // Finalización", "pillars_title": "Pilares y <br><span class=\"text-brand\">Viseras.</span>", "pillars_desc": "Una restauración integral. Nos aseguramos de que tus pilares A, B y C, junto con las persianas solares y viseras, sean meticulosamente cosidos a mano y forrados para combinar.",
                 "portfolio_sub": "El Archivo", "portfolio_title": "Testigo de la <br><span class=\"text-brand\">Transformación.</span>", "portfolio_desc": "Selecciona un vehículo a continuación para ver el proceso de restauración minucioso. Devolvemos interiores arruinados a la perfección de sala de exposición.",
-                "thumb_factory": "Fábrica Original", "thumb_alcantara": "Mejora Alcantara", "ba_after": "Después", "ba_before": "Antes",
+                "thumb_factory": "Fábrica Original",
+                "thumb_brand2": "Estándar OEM",
+                "thumb_brand3": "Mejora Premium",
+                "thumb_brand4": "Acabado de Lujo", "thumb_alcantara": "Mejora Alcantara", "ba_after": "Después", "ba_before": "Antes",
                 "marquee": "SOMOS 100% MÓVILES &bull; VAMOS A TI &bull; CASA U OFICINA &bull;",
                 "social_sub": "Resultados Reales. Comodidad Real.", "social_title": "Nuestro Feed <br>& Excelencia <span class=\"font-luxury italic text-white/80 font-light lowercase\">verificada</span>.",
                 "ig_view": "Ver en Instagram", "ig_stories": "Historias Destacadas", "story_bts": "Detrás de Escena", "story_daily": "Actualizaciones Diarias", "story_view": "Ver Historia",
