@@ -447,9 +447,9 @@
     </div>
 
     <!-- Ultra-Premium Navbar -->
-    <nav class="fixed w-full top-0 z-50 px-6 py-6 transition-all duration-500" id="navbar">
-        <div
-            class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
+    <nav class="fixed w-full top-0 z-50 transition-all duration-500 md:px-6 md:py-6" id="navbar">
+        <div id="navbar-container"
+            class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 md:glass md:rounded-full md:px-8 border-b border-white/5 md:shadow-2xl transition-all duration-500">
             <a href="#"
                 onclick="if(window.lenis) { window.lenis.scrollTo(0) } else { window.scrollTo(0,0) }; return false;"
                 class="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full magnetic hover-trigger hover:border-brand transition-colors"
@@ -1490,6 +1490,21 @@
 
             // Language
             document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => updateLanguage(btn.dataset.lang)));
+        });
+    </script>
+    <script>
+        // Mobile Navbar Scroll Effect
+        const navbarContainer = document.getElementById('navbar-container');
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth < 768 && navbarContainer) {
+                if (window.scrollY > 50) {
+                    navbarContainer.classList.add('glass', 'shadow-2xl', 'border-white/10');
+                    navbarContainer.classList.remove('border-white/5');
+                } else {
+                    navbarContainer.classList.remove('glass', 'shadow-2xl', 'border-white/10');
+                    navbarContainer.classList.add('border-white/5');
+                }
+            }
         });
     </script>
 </body>
