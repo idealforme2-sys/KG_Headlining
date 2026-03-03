@@ -478,7 +478,7 @@
                     <i data-lucide="phone" class="w-3 h-3 text-brand"></i> +1 321 374 1176
                 </a>
                 <a href="#contact"
-                    class="magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden"
+                    class="hidden md:flex magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden"
                     data-strength="30">
                     <div
                         class="absolute inset-0 bg-brand translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
@@ -487,9 +487,47 @@
                         class="relative z-10 text-[10px] tracking-[0.2em] uppercase group-hover:text-black transition-colors duration-300 font-bold"
                         data-i18n="nav_book">Book Concierge</span>
                 </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn"
+                    class="md:hidden flex items-center justify-center w-10 h-10 border border-white/10 rounded-full bg-white/5 relative z-[60]">
+                    <div class="flex flex-col gap-1.5 w-4">
+                        <span class="w-full h-[1px] bg-white transition-transform duration-300 origin-center"
+                            id="hamburger-top"></span>
+                        <span class="w-full h-[1px] bg-white transition-opacity duration-300" id="hamburger-mid"></span>
+                        <span class="w-full h-[1px] bg-white transition-transform duration-300 origin-center"
+                            id="hamburger-bot"></span>
+                    </div>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-overlay"
+        class="fixed inset-0 bg-dark/95 backdrop-blur-xl z-50 flex flex-col justify-center px-8 opacity-0 pointer-events-none transition-all duration-500">
+        <div class="flex flex-col gap-8 text-2xl font-display font-light uppercase tracking-widest text-white/50">
+            <a href="#services" class="mobile-nav-link hover:text-white transition-colors"
+                data-i18n="nav_mastery">Mastery</a>
+            <a href="#portfolio" class="mobile-nav-link hover:text-white transition-colors"
+                data-i18n="nav_transformations">Transformations</a>
+            <a href="#social-proof" class="mobile-nav-link text-brand font-bold flex items-center gap-4">
+                <div class="w-2 h-2 rounded-full bg-brand animate-pulse"></div> <span data-i18n="nav_mobile">Mobile
+                    Service</span>
+            </a>
+            <hr class="border-white/10 my-4 w-1/4">
+            <a href="#contact" class="mobile-nav-link hover:text-brand transition-colors text-white font-bold"
+                data-i18n="nav_book">Book Concierge</a>
+        </div>
+        <div class="absolute bottom-12 flex gap-6 mt-12">
+            <button class="lang-btn text-white transition-colors text-sm uppercase font-bold tracking-widest"
+                data-lang="en">EN</button>
+            <span class="w-[1px] h-4 bg-white/20"></span>
+            <button
+                class="lang-btn hover:text-white text-white/40 transition-colors text-sm uppercase font-bold tracking-widest"
+                data-lang="es">ES</button>
+        </div>
+    </div>
 
     <!-- 1. Cinematic Hero -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-dark">
@@ -1303,20 +1341,62 @@
                 el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6 }));
             });
 
-            // Horizontal Scroll
-            const sections = gsap.utils.toArray('.horizontal-panel');
-            if (sections.length > 0) {
-                gsap.to(sections, {
-                    xPercent: -100 * (sections.length - 1),
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".horizontal-wrapper",
-                        pin: true,
-                        scrub: 1,
-                        end: () => "+=" + document.querySelector(".horizontal-wrapper").offsetWidth * (sections.length - 1)
-                    }
-                });
+            // Horizontal Scroll MatchMedia
+            let mm = gsap.matchMedia();
+
+            mm.add("(min-width: 1024px)", () => {
+                const sections = gsap.utils.toArray('.horizontal-panel');
+                if (sections.length > 0) {
+                    gsap.to(sections, {
+                        xPercent: -100 * (sections.length - 1),
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: ".horizontal-wrapper",
+                            pin: true,
+                            scrub: 1,
+                            end: () => "+=" + document.querySelector(".horizontal-wrapper").offsetWidth * (sections.length - 1)
+                        }
+                    });
+                }
+            });
+
+            // Mobile Menu Toggle logic
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const hTop = document.getElementById('hamburger-top');
+            const hMid = document.getElementById('hamburger-mid');
+            const hBot = document.getElementById('hamburger-bot');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            let isMenuOpen = false;
+
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileOverlay.classList.add('opacity-100', 'pointer-events-auto');
+                    hTop.classList.add('translate-y-[5px]', 'rotate-45');
+                    hMid.classList.add('opacity-0');
+                    hBot.classList.add('-translate-y-[5px]', '-rotate-45');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+                    mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+                    hTop.classList.remove('translate-y-[5px]', 'rotate-45');
+                    hMid.classList.remove('opacity-0');
+                    hBot.classList.remove('-translate-y-[5px]', '-rotate-45');
+                    document.body.style.overflow = 'auto';
+                }
+            };
+
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', toggleMenu);
             }
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
 
             // Before/After
             const slider = document.getElementById('ba-container'), beforeImg = document.getElementById('master-before'), afterImg = document.getElementById('master-after'), handle = document.getElementById('ba-handle');
