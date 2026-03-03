@@ -138,12 +138,31 @@
         }
 
         @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -10%); }
-            30% { transform: translate(3%, -15%); }
-            50% { transform: translate(12%, 9%); }
-            70% { transform: translate(9%, 4%); }
-            90% { transform: translate(-1%, 7%); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            10% {
+                transform: translate(-5%, -10%);
+            }
+
+            30% {
+                transform: translate(3%, -15%);
+            }
+
+            50% {
+                transform: translate(12%, 9%);
+            }
+
+            70% {
+                transform: translate(9%, 4%);
+            }
+
+            90% {
+                transform: translate(-1%, 7%);
+            }
         }
 
         /* GSAP Typography Masking */
@@ -280,8 +299,17 @@
             column-gap: 1.5rem;
         }
 
-        @media (min-width: 640px) { .masonry { column-count: 2; } }
-        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        @media (min-width: 640px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry {
+                column-count: 3;
+            }
+        }
 
         .masonry-item {
             break-inside: avoid;
@@ -299,13 +327,23 @@
         }
 
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         @keyframes scroll-down {
-            0% { transform: translateY(-120%); }
-            100% { transform: translateY(220%); }
+            0% {
+                transform: translateY(-120%);
+            }
+
+            100% {
+                transform: translateY(220%);
+            }
         }
 
         /* Map styling */
@@ -316,7 +354,9 @@
             transition: opacity 0.3s;
         }
 
-        .map-container:hover iframe { opacity: 1; }
+        .map-container:hover iframe {
+            opacity: 1;
+        }
 
         /* Premium Preloader */
         #preloader {
@@ -331,31 +371,70 @@
         }
 
         @keyframes loading {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
-        @media (max-width: 1023px), (pointer: coarse) {
-            body { cursor: auto; }
-            #cursor, #cursor-follower { display: none; }
-            .horizontal-wrapper { height: auto; }
-            .horizontal-container { width: 100%; height: auto; display: block; }
-            .horizontal-panel { width: 100%; min-height: 70vh; padding: 4rem 1.25rem; }
+        @media (max-width: 1023px),
+        (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+
+            #cursor,
+            #cursor-follower {
+                display: none;
+            }
+
+            .horizontal-wrapper {
+                height: auto;
+            }
+
+            .horizontal-container {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .horizontal-panel {
+                width: 100%;
+                min-height: 70vh;
+                padding: 4rem 1.25rem;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
             }
-            .noise { animation: none; }
+
+            .noise {
+                animation: none;
+            }
         }
 
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 
@@ -369,10 +448,15 @@
         <div class="relative flex flex-col items-center">
             <div class="absolute inset-0 bg-brand/30 blur-[60px] rounded-full w-40 h-40 animate-pulse"></div>
             <div class="w-24 h-24 mb-6 relative z-10 flex items-center justify-center">
-                <img src="images_to_use/logo_transparent.png" class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] animate-[pulse_3s_ease-in-out_infinite]" alt="Logo">
+                <img src="images_to_use/logo_transparent.png"
+                    class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] animate-[pulse_3s_ease-in-out_infinite]"
+                    alt="Logo">
             </div>
-            <div class="w-64 h-2 bg-white/10 relative rounded-full overflow-hidden border border-white/20 p-[1px] shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-                <div class="h-full bg-brand w-full rounded-full transform -translate-x-full animate-[loading_2.5s_ease-in-out_forwards]"></div>
+            <div
+                class="w-64 h-2 bg-white/10 relative rounded-full overflow-hidden border border-white/20 p-[1px] shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                <div
+                    class="h-full bg-brand w-full rounded-full transform -translate-x-full animate-[loading_2.5s_ease-in-out_forwards]">
+                </div>
             </div>
             <div class="mt-4 text-[10px] tracking-[0.4em] text-brand/70 uppercase font-bold">Initializing</div>
         </div>
@@ -380,15 +464,23 @@
 
     <!-- Ultra-Premium Navbar -->
     <nav class="fixed w-full top-0 z-50 px-6 py-6 transition-all duration-500" id="navbar">
-        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
-            <a href="#" onclick="if(window.lenis) { window.lenis.scrollTo(0) } else { window.scrollTo(0,0) }; return false;" class="flex items-center gap-3 font-display font-bold text-2xl tracking-tighter uppercase magnetic hover-trigger" data-strength="20">
-                <img src="images_to_use/logo_transparent.png" class="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" alt="KG Logo">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
+            <a href="#"
+                onclick="if(window.lenis) { window.lenis.scrollTo(0) } else { window.scrollTo(0,0) }; return false;"
+                class="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full magnetic hover-trigger hover:border-brand transition-colors"
+                data-strength="20">
+                <img src="images_to_use/logo_transparent.png"
+                    class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" alt="KG Logo">
             </a>
-            <div class="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/60">
+            <div
+                class="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/60">
                 <a href="#services" class="hover:text-brand transition-colors" data-i18n="nav_mastery">Mastery</a>
-                <a href="#portfolio" class="hover:text-brand transition-colors" data-i18n="nav_transformations">Transformations</a>
+                <a href="#portfolio" class="hover:text-brand transition-colors"
+                    data-i18n="nav_transformations">Transformations</a>
                 <a href="#social-proof" class="text-brand font-bold flex items-center gap-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></div> <span data-i18n="nav_mobile">Mobile Service</span>
+                    <div class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></div> <span
+                        data-i18n="nav_mobile">Mobile Service</span>
                 </a>
             </div>
             <div class="flex items-center gap-6">
@@ -397,12 +489,19 @@
                     <span class="w-[1px] h-3 bg-white/20"></span>
                     <button class="lang-btn hover:text-white transition-colors uppercase" data-lang="es">ES</button>
                 </div>
-                <a href="tel:+13213741176" class="hidden lg:flex items-center gap-2 text-xs font-display tracking-widest text-white/80 hover:text-brand transition-colors hover-trigger">
+                <a href="tel:+13213741176"
+                    class="hidden lg:flex items-center gap-2 text-xs font-display tracking-widest text-white/80 hover:text-brand transition-colors hover-trigger">
                     <i data-lucide="phone" class="w-3 h-3 text-brand"></i> +1 321 374 1176
                 </a>
-                <a href="#contact" class="magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden" data-strength="30">
-                    <div class="absolute inset-0 bg-brand translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]"></div>
-                    <span class="relative z-10 text-[10px] tracking-[0.2em] uppercase group-hover:text-black transition-colors duration-300 font-bold" data-i18n="nav_book">Book Concierge</span>
+                <a href="#contact"
+                    class="magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden"
+                    data-strength="30">
+                    <div
+                        class="absolute inset-0 bg-brand translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
+                    </div>
+                    <span
+                        class="relative z-10 text-[10px] tracking-[0.2em] uppercase group-hover:text-black transition-colors duration-300 font-bold"
+                        data-i18n="nav_book">Book Concierge</span>
                 </a>
             </div>
         </div>
@@ -411,31 +510,41 @@
     <!-- 1. Cinematic Hero -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-dark">
         <div class="absolute inset-0 z-0">
-            <img src="images_to_use/hero_image.jpg" class="w-full h-full object-cover opacity-30 hero-img scale-110" alt="Hero">
+            <img src="images_to_use/hero_image.jpg" class="w-full h-full object-cover opacity-30 hero-img scale-110"
+                alt="Hero">
             <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/80 via-transparent to-[#030303]"></div>
             <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#030303]/90"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-16 flex flex-col items-center">
             <div class="mb-8">
-                <p class="font-sans text-brand tracking-[0.5em] uppercase text-xs font-bold flex items-center gap-4 justify-center">
+                <p
+                    class="font-sans text-brand tracking-[0.5em] uppercase text-xs font-bold flex items-center gap-4 justify-center">
                     <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
                     <span class="premium-text-animate opacity-0" data-i18n="hero_sub">100% Mobile Operations</span>
                     <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
                 </p>
             </div>
-            <h1 class="font-display font-bold text-[11vw] opacity-0 md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl premium-title-animate" data-i18n="hero_title">
-                Restoring<br><span class="font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4">Exquisite</span><br>Detail.
+            <h1 class="font-display font-bold text-[11vw] opacity-0 md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl hero-title"
+                data-i18n="hero_title">
+                Restoring<br><span
+                    class="font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4">Exquisite</span><br>Detail.
             </h1>
             <div class="mt-12 overflow-hidden flex flex-col items-center">
-                <p class="max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed hero-desc opacity-0" data-i18n="hero_desc">
-                    Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.
+                <p class="max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed hero-desc opacity-0"
+                    data-i18n="hero_desc">
+                    Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully
+                        mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades
+                    directly to your driveway or dealership.
                 </p>
-            
+
                 <div class="hero-scroll flex flex-col items-center gap-6 mt-16 opacity-0">
-                    <span class="text-[9px] uppercase tracking-[0.3em] text-white/40" data-i18n="hero_scroll">Discover Mastery</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-white/40" data-i18n="hero_scroll">Discover
+                        Mastery</span>
                     <div class="w-[1px] h-16 bg-white/10 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]"></div>
+                        <div
+                            class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -446,11 +555,16 @@
         <div class="horizontal-container">
             <div class="horizontal-panel">
                 <div class="relative z-10 max-w-4xl w-full">
-                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-6 reveal-text" data-i18n="expertise_sub">Our Expertise</p>
-                    <h2 class="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] reveal-text" data-i18n="expertise_title">
-                        Mastery in <br><span class="font-luxury italic text-white/80 font-light lowercase">every</span> detail.
+                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-6 reveal-text"
+                        data-i18n="expertise_sub">Our Expertise</p>
+                    <h2 class="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] reveal-text"
+                        data-i18n="expertise_title">
+                        Mastery in <br><span class="font-luxury italic text-white/80 font-light lowercase">every</span>
+                        detail.
                     </h2>
-                    <p class="mt-8 text-white/50 max-w-md font-light leading-relaxed reveal-text text-lg" data-i18n="expertise_desc">Scroll horizontally to explore the uncompromising standards of our core services. Engineered to perfection, executed in your driveway.</p>
+                    <p class="mt-8 text-white/50 max-w-md font-light leading-relaxed reveal-text text-lg"
+                        data-i18n="expertise_desc">Scroll horizontally to explore the uncompromising standards of our
+                        core services. Engineered to perfection, executed in your driveway.</p>
                 </div>
             </div>
 
@@ -458,9 +572,13 @@
                 <img src="images_to_use/factory_restoration.png" class="panel-img" alt="Foundation">
                 <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
                 <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
-                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text" data-i18n="service_01">01 // Foundation</span>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text" data-i18n="factory_title">Factory <br><span class="text-brand">Restoration.</span></h3>
-                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="factory_desc">We surgically extract the shell, strip the degraded, toxic structural foam down to the core fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.</p>
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_01">01 // Foundation</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="factory_title">Factory <br><span class="text-brand">Restoration.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="factory_desc">We
+                        surgically extract the shell, strip the degraded, toxic structural foam down to the core
+                        fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.</p>
                 </div>
             </div>
 
@@ -468,9 +586,13 @@
                 <img src="images_to_use/alcantara_upgrade.png" class="panel-img" alt="Materials">
                 <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
                 <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
-                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text" data-i18n="service_02">02 // Materials</span>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text" data-i18n="alcantara_title">Alcantara <br><span class="text-brand">Upgrades.</span></h3>
-                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="alcantara_desc">Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a track-focused, luxurious matte texture.</p>
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_02">02 // Materials</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="alcantara_title">Alcantara <br><span class="text-brand">Upgrades.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="alcantara_desc">
+                        Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your
+                        headliner, providing a track-focused, luxurious matte texture.</p>
                 </div>
             </div>
 
@@ -478,9 +600,13 @@
                 <img src="images_to_use/pillars_sunvisor.png" class="panel-img" alt="Completion">
                 <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
                 <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
-                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text" data-i18n="service_03">03 // Completion</span>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text" data-i18n="pillars_title">Pillars & <br><span class="text-brand">Sun Visors.</span></h3>
-                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="pillars_desc">A holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding shades and visors, are meticulously hand-stitched and recovered to match.</p>
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_03">03 // Completion</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="pillars_title">Pillars & <br><span class="text-brand">Sun Visors.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="pillars_desc">A
+                        holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding
+                        shades and visors, are meticulously hand-stitched and recovered to match.</p>
                 </div>
             </div>
         </div>
@@ -492,44 +618,79 @@
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
-                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text" data-i18n="portfolio_title">Witness the <br><span class="text-brand">Transformation.</span></h2>
-                    <p class="text-white/40 mt-4 font-light text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text"
+                        data-i18n="portfolio_title">Witness the <br><span class="text-brand">Transformation.</span></h2>
+                    <p
+                        class="text-white/40 mt-4 font-light text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
                         <i data-lucide="mouse-pointer-2" class="w-4 h-4 text-brand"></i> Drag to interact
                     </p>
                 </div>
-                <p class="text-white/50 max-w-sm font-light leading-relaxed reveal-text md:text-right" data-i18n="portfolio_desc">Select a vehicle below to view the meticulous restoration process. We turn ruined interiors back to showroom perfection.</p>
+                <p class="text-white/50 max-w-sm font-light leading-relaxed reveal-text md:text-right"
+                    data-i18n="portfolio_desc">Select a vehicle below to view the meticulous restoration process. We
+                    turn ruined interiors back to showroom perfection.</p>
             </div>
 
             <div class="ba-master cursor-ew-resize hover-trigger mb-10" data-cursor="drag" id="ba-container">
                 <img src="images_to_use/Nissan_after.png" alt="Restored" class="ba-after select-none" id="master-after">
-                <img src="images_to_use/Nissan_before.png" alt="Damaged" class="ba-before select-none" id="master-before">
+                <img src="images_to_use/Nissan_before.png" alt="Damaged" class="ba-before select-none"
+                    id="master-before">
                 <div class="ba-handle" id="ba-handle">
                     <div class="ba-handle-btn"><i data-lucide="move-horizontal" class="w-6 h-6"></i></div>
                 </div>
-                <div class="absolute top-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                <div
+                    class="absolute top-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
                     <span class="text-xs font-bold tracking-widest uppercase" data-i18n="ba_after">After</span>
                 </div>
-                <div class="absolute top-6 right-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                <div
+                    class="absolute top-6 right-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
                     <span class="text-xs font-bold tracking-widest uppercase" data-i18n="ba_before">Before</span>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8" id="ba-thumbnails">
-                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-white/10 transition-colors border-2 border-brand/50 thumbnail-active hover-trigger flex-1 text-center" data-before="images_to_use/Nissan_before.png" data-after="images_to_use/Nissan_after.png">
-                    <span class="text-xs font-bold uppercase tracking-widest block" data-i18n="thumb_factory">Factory Match</span>
-                    <span class="text-[9px] text-brand uppercase mt-1 block" data-i18n="car_1">Nissan Maxima</span>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-brand/50 thumbnail-active hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/Nissan_before.png" data-after="images_to_use/Nissan_after.png">
+                    <img src="images_to_use/Nissan_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_factory">Factory Match</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_1">Nissan
+                            Maxima</span>
+                    </div>
                 </div>
-                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-white/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center" data-before="images_to_use/Ford_before.png" data-after="images_to_use/Ford_after.png">
-                    <span class="text-xs font-bold uppercase tracking-widest block" data-i18n="thumb_brand2">OEM Standard</span>
-                    <span class="text-[9px] text-brand uppercase mt-1 block" data-i18n="car_2">Ford Explorer</span>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/Ford_before.png" data-after="images_to_use/Ford_after.png">
+                    <img src="images_to_use/Ford_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand2">OEM Standard</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_2">Ford
+                            Explorer</span>
+                    </div>
                 </div>
-                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-white/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center" data-before="images_to_use/bmw_before.png" data-after="images_to_use/bmw_after.png">
-                    <span class="text-xs font-bold uppercase tracking-widest block" data-i18n="thumb_brand3">Premium Upgrade</span>
-                    <span class="text-[9px] text-brand uppercase mt-1 block" data-i18n="car_3">BMW 3 Series</span>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/bmw_before.png" data-after="images_to_use/bmw_after.png">
+                    <img src="images_to_use/bmw_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand3">Premium Upgrade</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_3">BMW 3
+                            Series</span>
+                    </div>
                 </div>
-                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-white/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center" data-before="images_to_use/chevrolet_before.png" data-after="images_to_use/chevrolet_after.png">
-                    <span class="text-xs font-bold uppercase tracking-widest block" data-i18n="thumb_brand4">Luxury Finish</span>
-                    <span class="text-[9px] text-brand uppercase mt-1 block" data-i18n="car_4">Chevrolet Tahoe</span>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/chevrolet_before.png" data-after="images_to_use/chevrolet_after.png">
+                    <img src="images_to_use/chevrolet_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand4">Luxury Finish</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg"
+                            data-i18n="car_4">Chevrolet Tahoe</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -539,17 +700,21 @@
     <section class="py-8 bg-brand overflow-hidden relative rotate-[-1deg] scale-105 shadow-2xl z-20">
         <div class="marquee-container flex whitespace-nowrap">
             <div class="py-6 border-y border-white/5 bg-brand overflow-hidden relative z-10 w-full">
-                <div class="flex whitespace-nowrap animate-[marquee_20s_linear_infinite] min-w-max">
-                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4" data-i18n="marquee">
+                <div class="flex whitespace-nowrap min-w-max" style="animation: marquee 20s linear infinite;">
+                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4"
+                        data-i18n="marquee">
                         WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
                     </span>
-                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4" aria-hidden="true" data-i18n="marquee">
+                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4"
+                        aria-hidden="true" data-i18n="marquee">
                         WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
                     </span>
-                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4" aria-hidden="true" data-i18n="marquee">
+                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4"
+                        aria-hidden="true" data-i18n="marquee">
                         WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
                     </span>
-                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4" aria-hidden="true" data-i18n="marquee">
+                    <span class="text-black font-display font-black text-4xl tracking-tighter uppercase mx-4"
+                        aria-hidden="true" data-i18n="marquee">
                         WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
                     </span>
                 </div>
@@ -561,62 +726,100 @@
     <section id="social-proof" class="py-32 px-4 md:px-12 w-full bg-dark relative border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
-                <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text" data-i18n="social_sub">Real Results. Real Convenience.</p>
-                <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-6 reveal-text" data-i18n="social_title">
-                    The Studio Feed <br>& <span class="font-luxury italic text-white/80 font-light lowercase">verified</span> Excellence.
+                <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text"
+                    data-i18n="social_sub">Real Results. Real Convenience.</p>
+                <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-6 reveal-text"
+                    data-i18n="social_title">
+                    The Studio Feed <br>& <span
+                        class="font-luxury italic text-white/80 font-light lowercase">verified</span> Excellence.
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-7 masonry">
-                        <!-- Custom IG Posts -->
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DNn3AZ2NDo5/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DIcFlEWvB8M/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DCAgpFQPLRP/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-                        
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DBZykSVP4CX/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-                        
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DIcAwQKPejq/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-
-                        <!-- Reels -->
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DT1JdbTDdC8/embed" width="100%" height="580" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-                        
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DUzHrfgjZRr/embed" width="100%" height="580" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-                        
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DTv5uuujz3d/embed" width="100%" height="580" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
-                        
-                        <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
-                            <iframe src="https://www.instagram.com/p/DTv3JYrj0Ik/embed" width="100%" height="580" frameborder="0" scrolling="no" allowtransparency="true" class="rounded-md bg-white"></iframe>
-                        </div>
+                    <!-- Custom IG Posts -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DNn3AZ2NDo5/embed" width="100%" height="400"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
                     </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DIcFlEWvB8M/embed" width="100%" height="400"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DCAgpFQPLRP/embed" width="100%" height="400"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DBZykSVP4CX/embed" width="100%" height="400"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DIcAwQKPejq/embed" width="100%" height="400"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <!-- Reels -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DT1JdbTDdC8/embed" width="100%" height="580"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DUzHrfgjZRr/embed" width="100%" height="580"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DTv5uuujz3d/embed" width="100%" height="580"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group p-2">
+                        <iframe src="https://www.instagram.com/p/DTv3JYrj0Ik/embed" width="100%" height="580"
+                            frameborder="0" scrolling="no" allowtransparency="true"
+                            class="rounded-md bg-white"></iframe>
+                    </div>
+                </div>
 
                 <div class="lg:col-span-5 flex flex-col gap-6">
                     <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-6 glass">
                         <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2.5">
-                            <svg viewBox="0 0 24 24" class="w-full h-full"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            <svg viewBox="0 0 24 24" class="w-full h-full">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
                         </div>
                         <div>
                             <h3 class="font-bold text-lg">Excellent</h3>
                             <div class="flex gap-1 mt-1">
-                                <i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i>
                             </div>
                         </div>
                     </div>
@@ -624,61 +827,92 @@
                     <div class="glass-panel p-6 rounded-2xl">
                         <h3 class="font-bold text-lg mb-4 text-brand" data-i18n="ig_stories">Featured Stories</h3>
                         <div class="flex flex-col gap-4">
-                            <a href="https://www.instagram.com/kg_headliner/" target="_blank" class="block group bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brand transition-colors flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-full border-[3px] border-brand flex items-center justify-center bg-dark p-[2px] flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <a href="https://www.instagram.com/kg_headliner/" target="_blank"
+                                class="block group bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brand transition-colors flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full border-[3px] border-brand flex items-center justify-center bg-dark p-[2px] flex-shrink-0 group-hover:scale-110 transition-transform">
                                     <div class="w-full h-full rounded-full overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1606813293883-20786f671754?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover">
+                                        <img src="https://images.unsplash.com/photo-1606813293883-20786f671754?q=80&w=200&auto=format&fit=crop"
+                                            class="w-full h-full object-cover">
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="text-sm font-bold uppercase tracking-wide group-hover:text-brand transition-colors" data-i18n="story_bts">Behind the Scenes</span>
-                                    <span class="block text-[10px] text-white/50 uppercase" data-i18n="story_view">View Highlight</span>
+                                    <span
+                                        class="text-sm font-bold uppercase tracking-wide group-hover:text-brand transition-colors"
+                                        data-i18n="story_bts">Behind the Scenes</span>
+                                    <span class="block text-[10px] text-white/50 uppercase" data-i18n="story_view">View
+                                        Highlight</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-                
-<!-- Review Cards -->
+
+                    <!-- Review Cards -->
                     <div class="glass-panel p-6 rounded-2xl hover-trigger group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">M</div>
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    M</div>
                                 <div>
                                     <div class="text-sm font-bold uppercase tracking-wide">Michael R.</div>
                                     <div class="text-[10px] text-brand uppercase tracking-widest">Mobile Service</div>
                                 </div>
                             </div>
-                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
                         </div>
-                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"The fact that they came to my office and handled my Range Rover in the parking garage is unbelievable. The work is flawless, looked better than rolling off the showroom floor."</p>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"The fact that they came to
+                            my office and handled my Range Rover in the parking garage is unbelievable. The work is
+                            flawless, looked better than rolling off the showroom floor."</p>
                     </div>
 
                     <div class="glass-panel p-6 rounded-2xl hover-trigger group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">S</div>
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    S</div>
                                 <div>
                                     <div class="text-sm font-bold uppercase tracking-wide">Sarah T.</div>
                                     <div class="text-[10px] text-brand uppercase tracking-widest">At-Home Service</div>
                                 </div>
                             </div>
-                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
                         </div>
-                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"Absolute professionals. They pulled into my driveway, carefully disassembled the pillars without breaking a clip, and the new material is a perfect OEM match."</p>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"Absolute professionals. They
+                            pulled into my driveway, carefully disassembled the pillars without breaking a clip, and the
+                            new material is a perfect OEM match."</p>
                     </div>
 
                     <div class="glass-panel p-6 rounded-2xl hover-trigger group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">J</div>
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    J</div>
                                 <div>
                                     <div class="text-sm font-bold uppercase tracking-wide">James L.</div>
-                                    <div class="text-[10px] text-brand uppercase tracking-widest">Alcantara Upgrade</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Alcantara Upgrade
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i></div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
                         </div>
-                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"I didn't have time to drop my car at a shop for 3 days. KG came to me. The Italian Alcantara upgrade completely transformed my cabin. 10/10."</p>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"I didn't have time to drop
+                            my car at a shop for 3 days. KG came to me. The Italian Alcantara upgrade completely
+                            transformed my cabin. 10/10."</p>
                     </div>
 
                 </div>
@@ -691,30 +925,39 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div class="lg:col-span-5">
-                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text flex items-center gap-2" data-i18n="contact_sub">
+                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text flex items-center gap-2"
+                        data-i18n="contact_sub">
                         <i data-lucide="truck" class="w-4 h-4"></i> Mobile Dispatch
                     </p>
-                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-12 reveal-text" data-i18n="contact_title">
-                        Book Your <br><span class="font-luxury italic text-white/80 font-light lowercase">appointment.</span>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-12 reveal-text"
+                        data-i18n="contact_title">
+                        Book Your <br><span
+                            class="font-luxury italic text-white/80 font-light lowercase">appointment.</span>
                     </h2>
 
                     <div class="space-y-10">
                         <div class="flex items-start gap-6 reveal-text group">
-                            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
                                 <i data-lucide="phone-call" class="w-5 h-5 text-brand"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2" data-i18n="contact_line">Direct Line</h4>
-                                <a href="tel:+13213741176" class="text-2xl font-display font-bold hover:text-brand transition-colors">+1 321 374 1176</a>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2"
+                                    data-i18n="contact_line">Direct Line</h4>
+                                <a href="tel:+13213741176"
+                                    class="text-2xl font-display font-bold hover:text-brand transition-colors">+1 321
+                                    374 1176</a>
                             </div>
                         </div>
 
                         <div class="flex items-start gap-6 reveal-text group">
-                            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
                                 <i data-lucide="clock" class="w-5 h-5 text-brand"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2" data-i18n="contact_hours">Operating Hours</h4>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2"
+                                    data-i18n="contact_hours">Operating Hours</h4>
                                 <div class="text-lg font-light leading-relaxed">
                                     <span class="block" data-i18n="hours_days">Monday – Sunday</span>
                                     <span class="font-bold text-brand mt-1 block">08:00 AM – 08:00 PM</span>
@@ -723,28 +966,35 @@
                         </div>
 
                         <div class="flex items-start gap-6 reveal-text group">
-                            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand transition-colors">
                                 <i data-lucide="map" class="w-5 h-5 text-brand"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2" data-i18n="contact_area">Service Area Base</h4>
+                                <h4 class="text-xs uppercase tracking-[0.2em] text-white/50 mb-2"
+                                    data-i18n="contact_area">Service Area Base</h4>
                                 <div class="text-lg font-light leading-relaxed block">
                                     <span data-i18n="area_base">Based in Kissimmee, FL</span><br>
-                                    <span class="text-brand text-sm font-bold block mt-1" data-i18n="area_dispatch">We dispatch directly to you.</span>
+                                    <span class="text-brand text-sm font-bold block mt-1" data-i18n="area_dispatch">We
+                                        dispatch directly to you.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-7 h-[500px] lg:h-auto rounded-2xl overflow-hidden glass p-2 map-container relative">
+                <div
+                    class="lg:col-span-7 h-[500px] lg:h-auto rounded-2xl overflow-hidden glass p-2 map-container relative">
                     <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-black/40">
-                        <div class="bg-black/80 backdrop-blur-md border border-brand/50 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl">
+                        <div
+                            class="bg-black/80 backdrop-blur-md border border-brand/50 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl">
                             <div class="w-2 h-2 rounded-full bg-brand animate-ping"></div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-brand" data-i18n="map_zone">Dispatch Zone Active</span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-brand"
+                                data-i18n="map_zone">Dispatch Zone Active</span>
                         </div>
                     </div>
-                    <iframe src="https://www.google.com/maps?q=Kg+Headliner+Repair,+Kissimmee,+FL&z=15&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps?q=Kg+Headliner+Repair,+Kissimmee,+FL&z=15&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -752,14 +1002,19 @@
 
     <!-- Footer -->
     <footer class="py-10 bg-dark border-t border-white/10 text-center relative z-10">
-        <h2 class="font-display text-black/20 font-black text-[15vw] leading-[0.7] tracking-tighter m-0 uppercase footer-title overflow-hidden pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap" data-i18n="footer_mobile">
+        <h2 class="font-display text-black/20 font-black text-[15vw] leading-[0.7] tracking-tighter m-0 uppercase footer-title overflow-hidden pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            data-i18n="footer_mobile">
             MOBILE.
         </h2>
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6 gap-4">
             <div class="text-white/40 text-xs tracking-widest uppercase font-bold">&copy; 2026 KG Headliner Repair</div>
             <div class="flex gap-6">
-                <a href="https://www.instagram.com/kg_headliner/" target="_blank" class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i data-lucide="instagram" class="w-4 h-4 inline mb-1"></i> Instagram</a>
-                <a href="https://www.facebook.com/people/KG-Headliner-Replace/100095066636657/" target="_blank" class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i data-lucide="facebook" class="w-4 h-4 inline mb-1"></i> Facebook</a>
+                <a href="https://www.instagram.com/kg_headliner/" target="_blank"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="instagram" class="w-4 h-4 inline mb-1"></i> Instagram</a>
+                <a href="https://www.facebook.com/people/KG-Headliner-Replace/100095066636657/" target="_blank"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="facebook" class="w-4 h-4 inline mb-1"></i> Facebook</a>
             </div>
         </div>
     </footer>
@@ -780,7 +1035,7 @@
                 "service_02": "02 // Materials", "alcantara_title": "Alcantara <br><span class=\"text-brand\">Upgrades.</span>", "alcantara_desc": "Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a track-focused, luxurious matte texture.",
                 "service_03": "03 // Completion", "pillars_title": "Pillars & <br><span class=\"text-brand\">Sun Visors.</span>", "pillars_desc": "A holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding shades and visors, are meticulously hand-stitched and recovered to match.",
                 "portfolio_sub": "The Archive", "portfolio_title": "Witness the <br><span class=\"text-brand\">Transformation.</span>", "portfolio_desc": "Select a vehicle below to view the meticulous restoration process. We turn ruined interiors back to showroom perfection.",
-                "thumb_factory": "Factory Match", "thumb_alcantara": "Alcantara Upgrade", "ba_after": "After", "ba_before": "Before",
+                "thumb_factory": "Factory Match", "thumb_brand2": "OEM Standard", "thumb_brand3": "Premium Upgrade", "thumb_brand4": "Luxury Finish", "thumb_alcantara": "Alcantara Upgrade", "ba_after": "After", "ba_before": "Before",
                 "marquee": "WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;",
                 "social_sub": "Real Results. Real Convenience.", "social_title": "The Studio Feed <br>& <span class=\"font-luxury italic text-white/80 font-light lowercase\">verified</span> Excellence.",
                 "ig_view": "View on Instagram", "ig_stories": "Featured Stories", "story_bts": "Behind the Scenes", "story_daily": "Daily Updates", "story_view": "View Highlight",
@@ -819,9 +1074,9 @@
             });
             if (typeof window.SplitType !== 'undefined' && typeof window.gsap !== 'undefined') {
                 new SplitType('.premium-text-animate', { types: 'chars' });
-                new SplitType('.premium-title-animate', { types: 'words, chars' });
+
                 window.gsap.fromTo('.premium-text-animate .char', { opacity: 0 }, { opacity: 1, stagger: 0.01, duration: 0.5 });
-                window.gsap.fromTo('.premium-title-animate .word', { opacity: 0 }, { opacity: 1, stagger: 0.05, duration: 0.5 });
+                window.gsap.fromTo('.hero-title', { opacity: 0 }, { opacity: 1, duration: 1 });
             }
         };
 
@@ -833,17 +1088,14 @@
                         opacity: 0, duration: 1.2, ease: "power2.inOut",
                         onComplete: () => {
                             preloader.style.display = 'none';
-                            if (typeof window.SplitType !== 'undefined') {
-                                const subText = new SplitType('.premium-text-animate', { types: 'chars' });
-                                const titleText = new SplitType('.premium-title-animate', { types: 'words, chars' });
-                                const tl = window.gsap.timeline();
-                                tl.fromTo('.hero-img', { scale: 1.3, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 1.5, ease: "power4.out" })
-                                    .fromTo('.hero-line', { width: 0, opacity: 0 }, { width: 32, opacity: 1, duration: 1, ease: "power3.out" }, "-=1")
-                                    .fromTo(subText.chars, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: "back.out(1.7)" }, "-=0.5")
-                                    .fromTo(titleText.words, { y: 100, opacity: 0, rotateX: -45 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.2, stagger: 0.1, ease: "expo.out" }, "-=0.8")
-                                    .fromTo('.hero-desc', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8")
-                                    .fromTo('.hero-scroll', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1 }, "-=0.5");
-                            }
+                            const subText = new SplitType('.premium-text-animate', { types: 'chars' });
+                            const tl = window.gsap.timeline();
+                            tl.fromTo('.hero-img', { scale: 1.3, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 1.5, ease: "power4.out" })
+                                .fromTo('.hero-line', { width: 0, opacity: 0 }, { width: 32, opacity: 1, duration: 1, ease: "power3.out" }, "-=1")
+                                .fromTo(subText.chars, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: "back.out(1.7)" }, "-=0.5")
+                                .fromTo('.hero-title', { y: 100, opacity: 0, rotateX: -45 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.2, ease: "expo.out" }, "-=0.8")
+                                .fromTo('.hero-desc', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8")
+                                .fromTo('.hero-scroll', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1 }, "-=0.5");
                         }
                     });
                 } else {
@@ -893,7 +1145,7 @@
             // Magnetic
             document.querySelectorAll('.magnetic').forEach(el => {
                 el.addEventListener('mousemove', (e) => {
-                    const r = el.getBoundingClientRect(), x = e.clientX - r.left - r.width/2, y = e.clientY - r.top - r.height/2;
+                    const r = el.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
                     gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.6 });
                 });
                 el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6 }));
@@ -932,4 +1184,5 @@
         });
     </script>
 </body>
+
 </html>
