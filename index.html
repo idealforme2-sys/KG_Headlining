@@ -506,6 +506,13 @@
     <!-- Mobile Navigation Overlay -->
     <div id="mobile-overlay"
         class="fixed inset-0 bg-dark/95 backdrop-blur-xl z-50 flex flex-col justify-center px-8 opacity-0 pointer-events-none transition-all duration-500">
+
+        <button id="mobile-close-btn"
+            class="absolute top-8 right-6 w-12 h-12 flex items-center justify-center border border-white/10 rounded-full bg-white/5 text-white/60 hover:text-white transition-colors"
+            aria-label="Close menu">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
         <div class="flex flex-col gap-8 text-2xl font-display font-light uppercase tracking-widest text-white/50">
             <a href="#services" class="mobile-nav-link hover:text-white transition-colors"
                 data-i18n="nav_mastery">Mastery</a>
@@ -637,17 +644,18 @@
     <!-- 3. Before/After Gallery -->
     <section id="portfolio" class="py-32 px-4 md:px-12 w-full bg-surface relative">
         <div class="absolute top-0 right-0 w-1/2 h-full bg-brand/5 blur-[150px] rounded-full pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                <div>
-                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text"
+        <div class="max-w-7xl mx-auto relative z-10 w-full overflow-hidden">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6 md:gap-8 w-full max-w-full">
+                <div class="w-full">
+                    <h2 class="font-display text-[10vw] md:text-6xl font-bold uppercase tracking-tighter leading-[0.9] md:leading-tight reveal-text max-w-full break-words"
                         data-i18n="portfolio_title">Witness the <br><span class="text-brand">Transformation.</span></h2>
                     <p
-                        class="text-white/40 mt-4 font-light text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
+                        class="text-white/40 mt-4 font-light text-[10px] md:text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
                         <i data-lucide="mouse-pointer-2" class="w-4 h-4 text-brand"></i> Drag to interact
                     </p>
                 </div>
-                <p class="text-white/50 max-w-sm font-light leading-relaxed reveal-text md:text-right"
+                <p class="text-white/50 w-full max-w-full md:max-w-sm font-light text-sm md:text-base leading-relaxed reveal-text md:text-right"
                     data-i18n="portfolio_desc">Select a vehicle below to view the meticulous restoration process. We
                     turn ruined interiors back to showroom perfection.</p>
             </div>
@@ -1363,6 +1371,7 @@
             // Mobile Menu Toggle logic
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileOverlay = document.getElementById('mobile-overlay');
+            const mobileCloseBtn = document.getElementById('mobile-close-btn');
             const hTop = document.getElementById('hamburger-top');
             const hMid = document.getElementById('hamburger-mid');
             const hBot = document.getElementById('hamburger-bot');
@@ -1390,6 +1399,9 @@
 
             if (mobileBtn) {
                 mobileBtn.addEventListener('click', toggleMenu);
+            }
+            if (mobileCloseBtn) {
+                mobileCloseBtn.addEventListener('click', toggleMenu);
             }
 
             mobileLinks.forEach(link => {
