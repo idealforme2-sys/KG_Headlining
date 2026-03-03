@@ -409,24 +409,6 @@
             }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-
-            .noise {
-                animation: none;
-            }
-        }
 
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -518,10 +500,10 @@
             <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#030303]/90"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-[20vh] flex flex-col items-center">
-            <div class="mb-8">
+        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-[28vh] flex flex-col items-center">
+            <div class="mb-6 md:mb-8">
                 <p
-                    class="font-sans text-brand tracking-[0.5em] uppercase text-xs font-bold flex items-center gap-4 justify-center">
+                    class="font-sans text-brand tracking-[0.4em] md:tracking-[0.5em] uppercase text-[10px] md:text-[11px] font-bold flex items-center gap-4 justify-center">
                     <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
                     <span class="premium-text-animate" data-i18n="hero_sub">100% Mobile Operations</span>
                     <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
