@@ -518,21 +518,21 @@
             <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#030303]/90"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-[15vh] flex flex-col items-center">
-            <div class="mb-4 md:mb-8">
+        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-[20vh] flex flex-col items-center">
+            <div class="mb-8">
                 <p
-                    class="font-sans text-brand tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] md:text-xs font-bold flex items-center gap-4 justify-center">
-                    <span class="w-4 md:w-8 h-[1px] bg-brand hero-line opacity-0"></span>
+                    class="font-sans text-brand tracking-[0.5em] uppercase text-xs font-bold flex items-center gap-4 justify-center">
+                    <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
                     <span class="premium-text-animate" data-i18n="hero_sub">100% Mobile Operations</span>
-                    <span class="w-4 md:w-8 h-[1px] bg-brand hero-line opacity-0"></span>
+                    <span class="w-8 h-[1px] bg-brand hero-line opacity-0"></span>
                 </p>
             </div>
-            <h1 class="font-display font-bold text-[12vw] opacity-0 md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl hero-title"
+            <h1 class="font-display font-bold text-[11vw] opacity-0 md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl hero-title"
                 data-i18n="hero_title">
                 Restoring<br><span
-                    class="font-luxury italic text-brand font-light lowercase text-[13vw] md:text-[10vw] pr-2 md:pr-4">Exquisite</span><br>Detail.
+                    class="font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4">Exquisite</span><br>Detail.
             </h1>
-            <div class="mt-8 md:mt-12 overflow-hidden flex flex-col items-center">
+            <div class="mt-12 overflow-hidden flex flex-col items-center">
                 <p class="max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed hero-desc opacity-0"
                     data-i18n="hero_desc">
                     Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully
@@ -1067,6 +1067,23 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Restored Map -->
+                    <div
+                        class="mt-12 w-full h-[300px] lg:h-[350px] rounded-2xl overflow-hidden glass p-2 map-container relative shadow-xl">
+                        <div
+                            class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-black/40">
+                            <div
+                                class="bg-black/80 backdrop-blur-md border border-brand/50 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl">
+                                <div class="w-2 h-2 rounded-full bg-brand animate-ping"></div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-brand"
+                                    data-i18n="map_zone">Dispatch Zone Active</span>
+                            </div>
+                        </div>
+                        <iframe src="https://www.google.com/maps?q=Kg+Headliner+Repair,+Kissimmee,+FL&z=15&output=embed"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
                 </div>
 
                 <!-- Right: Form -->
