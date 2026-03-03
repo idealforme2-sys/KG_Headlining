@@ -1,0 +1,1418 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030303] text-white scroll-smooth cursor-none">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KG Headliner | Premium Mobile Automotive Interiors</title>
+    <meta name="description"
+        content="KG Headliner Repair is a premium mobile automotive interior service in Florida specializing in headliner restoration and Alcantara upgrades.">
+
+    <!-- Luxury Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        luxury: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: '#D4AF37', // Luxury Metallic Gold
+                        dark: '#030303',
+                        surface: '#0a0a0a',
+                        surface2: '#121212',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Core Reset & Aesthetics */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #030303;
+        }
+
+        ::selection {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Bespoke Fluid Cursor */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        #cursor-follower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+        }
+
+        body.hover-active #cursor {
+            width: 0;
+            height: 0;
+        }
+
+        body.hover-active #cursor-follower {
+            width: 90px;
+            height: 90px;
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.05);
+            backdrop-filter: blur(2px);
+        }
+
+        body.drag-active #cursor {
+            width: 0;
+            height: 0;
+        }
+
+        body.drag-active #cursor-follower {
+            width: 70px;
+            height: 70px;
+            background: #D4AF37;
+            mix-blend-mode: difference;
+        }
+
+        body.drag-active #cursor-follower::after {
+            content: '< >';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* Cinematic Film Grain */
+        .noise {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            10% {
+                transform: translate(-5%, -10%);
+            }
+
+            30% {
+                transform: translate(3%, -15%);
+            }
+
+            50% {
+                transform: translate(12%, 9%);
+            }
+
+            70% {
+                transform: translate(9%, 4%);
+            }
+
+            90% {
+                transform: translate(-1%, 7%);
+            }
+        }
+
+        /* GSAP Typography Masking */
+        .line {
+            overflow: hidden;
+            padding-bottom: 0.1em;
+            margin-bottom: -0.1em;
+        }
+
+        /* Glassmorphism & UI */
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(5, 5, 5, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* Master Before/After Slider */
+        .ba-master {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            touch-action: none;
+        }
+
+        .ba-before {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            z-index: 2;
+            pointer-events: none;
+            filter: brightness(0.8) contrast(1.2) sepia(0.2);
+            transition: opacity 0.4s ease;
+        }
+
+        .ba-after {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: #D4AF37;
+            z-index: 3;
+            transform: translateX(-50%);
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .ba-handle-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: #D4AF37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+        }
+
+        /* Horizontal Scroll Specifics */
+        .horizontal-wrapper {
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .horizontal-container {
+            display: flex;
+            width: 500vw;
+            height: 100%;
+            will-change: transform;
+        }
+
+        .horizontal-panel {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5vw;
+        }
+
+        .panel-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: grayscale(50%);
+            transition: filter 0.5s, opacity 0.5s;
+        }
+
+        .horizontal-panel:hover .panel-img {
+            filter: grayscale(0%);
+            opacity: 0.6;
+        }
+
+        /* Masonry Feed */
+        .masonry {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        /* Kinetic Marquee */
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes scroll-down {
+            0% {
+                transform: translateY(-120%);
+            }
+
+            100% {
+                transform: translateY(220%);
+            }
+        }
+
+        /* Map styling */
+        .map-container iframe {
+            filter: invert(90%) hue-rotate(180deg) grayscale(80%) contrast(120%);
+            border-radius: 1rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .map-container:hover iframe {
+            opacity: 1;
+        }
+
+        /* Premium Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.14), transparent 45%), #030303;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 1023px),
+        (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+
+            #cursor,
+            #cursor-follower {
+                display: none;
+            }
+
+            .horizontal-wrapper {
+                height: auto;
+            }
+
+            .horizontal-container {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .horizontal-panel {
+                width: 100%;
+                min-height: 70vh;
+                padding: 4rem 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .noise {
+                animation: none;
+            }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-sans selection:bg-brand selection:text-black">
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="noise"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="relative flex flex-col items-center">
+            <div class="absolute inset-0 bg-brand/30 blur-[60px] rounded-full w-40 h-40 animate-pulse"></div>
+            <div class="w-24 h-24 mb-6 relative z-10 flex items-center justify-center">
+                <img src="images_to_use/logo_transparent.png"
+                    class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] animate-[pulse_3s_ease-in-out_infinite]"
+                    alt="Logo">
+            </div>
+            <div
+                class="w-64 h-2 bg-white/10 relative rounded-full overflow-hidden border border-white/20 p-[1px] shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                <div
+                    class="h-full bg-brand w-full rounded-full transform -translate-x-full animate-[loading_2.5s_ease-in-out_forwards]">
+                </div>
+            </div>
+            <div class="mt-4 text-[10px] tracking-[0.4em] text-brand/70 uppercase font-bold">Initializing <span
+                    id="loading-pct">0%</span></div>
+        </div>
+    </div>
+
+    <!-- Ultra-Premium Navbar -->
+    <nav class="fixed w-full top-0 z-50 px-6 py-6 transition-all duration-500" id="navbar">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4 border-b border-white/5 shadow-2xl">
+            <a href="#"
+                onclick="if(window.lenis) { window.lenis.scrollTo(0) } else { window.scrollTo(0,0) }; return false;"
+                class="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full magnetic hover-trigger hover:border-brand transition-colors"
+                data-strength="20">
+                <img src="images_to_use/logo_transparent.png"
+                    class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" alt="KG Logo">
+            </a>
+            <div
+                class="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/60">
+                <a href="#services" class="hover:text-brand transition-colors" data-i18n="nav_mastery">Mastery</a>
+                <a href="#portfolio" class="hover:text-brand transition-colors"
+                    data-i18n="nav_transformations">Transformations</a>
+                <a href="#social-proof" class="text-brand font-bold flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></div> <span
+                        data-i18n="nav_mobile">Mobile Service</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-white/40">
+                    <button class="lang-btn text-white transition-colors uppercase" data-lang="en">EN</button>
+                    <span class="w-[1px] h-3 bg-white/20"></span>
+                    <button class="lang-btn hover:text-white transition-colors uppercase" data-lang="es">ES</button>
+                </div>
+                <a href="tel:+13213741176"
+                    class="hidden lg:flex items-center gap-2 text-xs font-display tracking-widest text-white/80 hover:text-brand transition-colors hover-trigger">
+                    <i data-lucide="phone" class="w-3 h-3 text-brand"></i> +1 321 374 1176
+                </a>
+                <a href="#contact"
+                    class="magnetic hover-trigger group relative px-6 py-2.5 bg-white/5 border border-white/10 rounded-full overflow-hidden"
+                    data-strength="30">
+                    <div
+                        class="absolute inset-0 bg-brand translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
+                    </div>
+                    <span
+                        class="relative z-10 text-[10px] tracking-[0.2em] uppercase group-hover:text-black transition-colors duration-300 font-bold"
+                        data-i18n="nav_book">Book Concierge</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Cinematic Hero -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-dark">
+        <div class="absolute inset-0 z-0">
+            <img src="images_to_use/hero_image.jpg" class="w-full h-full object-cover opacity-30 hero-img scale-110"
+                alt="Hero">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/80 via-transparent to-[#030303]"></div>
+            <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#030303]/90"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 w-full max-w-7xl mx-auto mt-[15vh] flex flex-col items-center">
+            <div class="mb-4 md:mb-8">
+                <p
+                    class="font-sans text-brand tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] md:text-xs font-bold flex items-center gap-4 justify-center">
+                    <span class="w-4 md:w-8 h-[1px] bg-brand hero-line opacity-0"></span>
+                    <span class="premium-text-animate" data-i18n="hero_sub">100% Mobile Operations</span>
+                    <span class="w-4 md:w-8 h-[1px] bg-brand hero-line opacity-0"></span>
+                </p>
+            </div>
+            <h1 class="font-display font-bold text-[12vw] opacity-0 md:text-[9vw] leading-[0.8] tracking-tighter uppercase m-0 text-white drop-shadow-2xl hero-title"
+                data-i18n="hero_title">
+                Restoring<br><span
+                    class="font-luxury italic text-brand font-light lowercase text-[13vw] md:text-[10vw] pr-2 md:pr-4">Exquisite</span><br>Detail.
+            </h1>
+            <div class="mt-8 md:mt-12 overflow-hidden flex flex-col items-center">
+                <p class="max-w-xl mx-auto text-white/50 font-light text-sm md:text-base leading-relaxed hero-desc opacity-0"
+                    data-i18n="hero_desc">
+                    Your time is a luxury. We are Florida's premier <strong class="text-white font-medium">fully
+                        mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades
+                    directly to your driveway or dealership.
+                </p>
+
+                <div class="hero-scroll flex flex-col items-center gap-6 mt-16 opacity-0">
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-white/40" data-i18n="hero_scroll">Discover
+                        Mastery</span>
+                    <div class="w-[1px] h-16 bg-white/10 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1/2 bg-brand animate-[scroll-down_2s_ease-in-out_infinite]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- 2. Horizontal Services -->
+    <section id="services" class="horizontal-wrapper bg-dark">
+        <div class="horizontal-container">
+            <div class="horizontal-panel">
+                <div class="relative z-10 max-w-4xl w-full">
+                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-6 reveal-text"
+                        data-i18n="expertise_sub">Our Expertise</p>
+                    <h2 class="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] reveal-text"
+                        data-i18n="expertise_title">
+                        Mastery in <br><span class="font-luxury italic text-white/80 font-light lowercase">every</span>
+                        detail.
+                    </h2>
+                    <p class="mt-8 text-white/50 max-w-md font-light leading-relaxed reveal-text text-lg"
+                        data-i18n="expertise_desc">Scroll horizontally to explore the uncompromising standards of our
+                        core services. Engineered to perfection, executed in your driveway.</p>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <img src="images_to_use/factory_restoration.png" class="panel-img" alt="Foundation">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_01">01 // Foundation</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="factory_title">Factory <br><span class="text-brand">Restoration.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="factory_desc">We
+                        surgically extract the shell, strip the degraded, toxic structural foam down to the core
+                        fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.</p>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <img src="images_to_use/alcantara_upgrade.png" class="panel-img" alt="Materials">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_02">02 // Materials</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="alcantara_title">Alcantara <br><span class="text-brand">Upgrades.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="alcantara_desc">
+                        Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your
+                        headliner, providing a track-focused, luxurious matte texture.</p>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <img src="images_to_use/pillars_sunvisor.png" class="panel-img" alt="Completion">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-transparent"></div>
+                <div class="h-full flex flex-col justify-end p-8 md:p-12 relative z-10">
+                    <span class="text-brand font-bold tracking-[0.3em] uppercase text-[10px] mb-4 reveal-text"
+                        data-i18n="service_03">03 // Completion</span>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase mb-4 reveal-text"
+                        data-i18n="pillars_title">Pillars & <br><span class="text-brand">Sun Visors.</span></h3>
+                    <p class="text-white/60 font-light leading-relaxed max-w-sm reveal-text" data-i18n="pillars_desc">A
+                        holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding
+                        shades and visors, are meticulously hand-stitched and recovered to match.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Before/After Gallery -->
+    <section id="portfolio" class="py-32 px-4 md:px-12 w-full bg-surface relative">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand/5 blur-[150px] rounded-full pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter reveal-text"
+                        data-i18n="portfolio_title">Witness the <br><span class="text-brand">Transformation.</span></h2>
+                    <p
+                        class="text-white/40 mt-4 font-light text-sm uppercase tracking-[0.2em] flex items-center gap-2 reveal-text">
+                        <i data-lucide="mouse-pointer-2" class="w-4 h-4 text-brand"></i> Drag to interact
+                    </p>
+                </div>
+                <p class="text-white/50 max-w-sm font-light leading-relaxed reveal-text md:text-right"
+                    data-i18n="portfolio_desc">Select a vehicle below to view the meticulous restoration process. We
+                    turn ruined interiors back to showroom perfection.</p>
+            </div>
+
+            <div class="ba-master cursor-ew-resize hover-trigger mb-10" data-cursor="drag" id="ba-container">
+                <img src="images_to_use/Nissan_after.png" alt="Restored" class="ba-after select-none" id="master-after">
+                <img src="images_to_use/Nissan_before.png" alt="Damaged" class="ba-before select-none"
+                    id="master-before">
+                <div class="ba-handle" id="ba-handle">
+                    <div class="ba-handle-btn"><i data-lucide="move-horizontal" class="w-6 h-6"></i></div>
+                </div>
+                <div
+                    class="absolute top-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                    <span class="text-xs font-bold tracking-widest uppercase" data-i18n="ba_after">After</span>
+                </div>
+                <div
+                    class="absolute top-6 right-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                    <span class="text-xs font-bold tracking-widest uppercase" data-i18n="ba_before">Before</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8" id="ba-thumbnails">
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-brand/50 thumbnail-active hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/Nissan_before.png" data-after="images_to_use/Nissan_after.png">
+                    <img src="images_to_use/Nissan_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_factory">Factory Match</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_1">Nissan
+                            Maxima</span>
+                    </div>
+                </div>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/Ford_before.png" data-after="images_to_use/Ford_after.png">
+                    <img src="images_to_use/Ford_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand2">OEM Standard</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_2">Ford
+                            Explorer</span>
+                    </div>
+                </div>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/bmw_before.png" data-after="images_to_use/bmw_after.png">
+                    <img src="images_to_use/bmw_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand3">Premium Upgrade</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg" data-i18n="car_3">BMW 3
+                            Series</span>
+                    </div>
+                </div>
+                <div class="glass-panel px-6 py-4 rounded-xl cursor-pointer hover:bg-brand/10 transition-colors border-2 border-transparent hover-trigger flex-1 text-center relative overflow-hidden"
+                    data-before="images_to_use/chevrolet_before.png" data-after="images_to_use/chevrolet_after.png">
+                    <img src="images_to_use/chevrolet_after.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-widest block drop-shadow-lg"
+                            data-i18n="thumb_brand4">Luxury Finish</span>
+                        <span class="text-[9px] text-brand uppercase mt-1 block drop-shadow-lg"
+                            data-i18n="car_4">Chevrolet Tahoe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Marquee -->
+    <section class="py-8 bg-brand overflow-hidden relative rotate-[-1deg] scale-105 shadow-2xl z-20">
+        <div class="py-6 border-y border-white/5 bg-brand relative z-10 w-full flex overflow-hidden">
+            <div class="marquee-content pr-8 md:pr-12">
+                <span
+                    class="text-black font-display font-black text-2xl md:text-4xl tracking-tighter uppercase mx-2 md:mx-4 whitespace-nowrap"
+                    data-i18n="marquee">
+                    WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
+                </span>
+                <span
+                    class="text-black font-display font-black text-2xl md:text-4xl tracking-tighter uppercase mx-2 md:mx-4 whitespace-nowrap"
+                    aria-hidden="true" data-i18n="marquee">
+                    WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
+                </span>
+            </div>
+            <div class="marquee-content pr-8 md:pr-12" aria-hidden="true">
+                <span
+                    class="text-black font-display font-black text-2xl md:text-4xl tracking-tighter uppercase mx-2 md:mx-4 whitespace-nowrap"
+                    aria-hidden="true" data-i18n="marquee">
+                    WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
+                </span>
+                <span
+                    class="text-black font-display font-black text-2xl md:text-4xl tracking-tighter uppercase mx-2 md:mx-4 whitespace-nowrap"
+                    aria-hidden="true" data-i18n="marquee">
+                    WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Social Feed -->
+    <section id="social-proof" class="py-32 px-4 md:px-12 w-full bg-dark relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text"
+                    data-i18n="social_sub">Real Results. Real Convenience.</p>
+                <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-6 reveal-text"
+                    data-i18n="social_title">
+                    The Studio Feed <br>& <span
+                        class="font-luxury italic text-white/80 font-light lowercase">verified</span> Excellence.
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-7 masonry" id="ig-feed-container">
+                    <!-- Carousel 1: DIcAwQKPejq (DNn3AZ2NDo5) -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group relative ig-carousel"
+                        data-url="https://www.instagram.com/p/DNn3AZ2NDo5/">
+                        <div class="carousel-track flex w-full h-full transition-transform duration-300">
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcAwQKPejq/SaveClip.App_489837260_18026978312655717_8740092545191875892_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcAwQKPejq/SaveClip.App_490448615_18026978321655717_2697108306896478217_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcAwQKPejq/SaveClip.App_490513103_18026978330655717_6838633478545999147_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                        </div>
+                        <div class="absolute inset-x-0 top-0 bottom-10 flex">
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-start px-2 carousel-prev z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-left"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                            <a href="https://www.instagram.com/p/DNn3AZ2NDo5/" target="_blank"
+                                class="flex-grow z-10 cursor-pointer"></a>
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-end px-2 carousel-next z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-right"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                        </div>
+                        <div
+                            class="absolute bottom-4 w-full flex justify-center gap-1.5 carousel-dots pointer-events-none">
+                        </div>
+                    </div>
+
+                    <!-- Carousel 2: DIcFlEWvB8M -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group relative ig-carousel"
+                        data-url="https://www.instagram.com/p/DIcFlEWvB8M/">
+                        <div class="carousel-track flex w-full h-full transition-transform duration-300">
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcFlEWvB8M/SaveClip.App_489850450_18026981813655717_1345258382475329152_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcFlEWvB8M/SaveClip.App_491252444_18026981831655717_86279498012178823_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcFlEWvB8M/SaveClip.App_491439624_18026981849655717_2540910653190728691_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcFlEWvB8M/SaveClip.App_491442827_18026981846655717_1268969024983891279_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDIcFlEWvB8M/SaveClip.App_491444304_18026981822655717_4661469697831911386_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                        </div>
+                        <div class="absolute inset-x-0 top-0 bottom-10 flex">
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-start px-2 carousel-prev z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-left"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                            <a href="https://www.instagram.com/p/DIcFlEWvB8M/" target="_blank"
+                                class="flex-grow z-10 cursor-pointer"></a>
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-end px-2 carousel-next z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-right"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                        </div>
+                        <div
+                            class="absolute bottom-4 w-full flex justify-center gap-1.5 carousel-dots pointer-events-none">
+                        </div>
+                    </div>
+
+                    <!-- Carousel 3: DNn3AZ2NDo5 -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group relative ig-carousel"
+                        data-url="https://www.instagram.com/p/DNn3AZ2NDo5/">
+                        <div class="carousel-track flex w-full h-full transition-transform duration-300">
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_536334018_18041470553655717_8525437524908537559_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_536492622_18041470598655717_2034489985705523988_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_536610629_18041470562655717_8586550287628449445_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_537074341_18041470580655717_3191916207584495756_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_537112182_18041470595655717_2055752623699493402_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDNn3AZ2NDo5/SaveClip.App_538060938_18041470577655717_3003621635630678203_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                        </div>
+                        <div class="absolute inset-x-0 top-0 bottom-10 flex">
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-start px-2 carousel-prev z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-left"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                            <a href="https://www.instagram.com/p/DNn3AZ2NDo5/" target="_blank"
+                                class="flex-grow z-10 cursor-pointer"></a>
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-end px-2 carousel-next z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-right"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                        </div>
+                        <div
+                            class="absolute bottom-4 w-full flex justify-center gap-1.5 carousel-dots pointer-events-none">
+                        </div>
+                    </div>
+
+                    <!-- Carousel 4: DCAgpFQPLRPimg_index=4 -->
+                    <div class="masonry-item rounded-lg overflow-hidden glass-panel group relative ig-carousel"
+                        data-url="https://www.instagram.com/p/DCAgpFQPLRP/">
+                        <div class="carousel-track flex w-full h-full transition-transform duration-300">
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDCAgpFQPLRPimg_index=4/SaveClip.App_465687829_1791260681617268_2939747682622029696_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDCAgpFQPLRPimg_index=4/SaveClip.App_465757409_1081568129697170_8445998079120732691_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDCAgpFQPLRPimg_index=4/SaveClip.App_465758043_525614747116190_8826339597686185555_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDCAgpFQPLRPimg_index=4/SaveClip.App_465812956_1592673725015546_3409151648734513459_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                            <img src="images_to_use/Instagram_posts_videos_stories/httpswww.instagram.compDCAgpFQPLRPimg_index=4/SaveClip.App_465951913_423904723903897_2972953054971230323_n.jpg"
+                                class="w-full flex-shrink-0 object-cover" />
+                        </div>
+                        <div class="absolute inset-x-0 top-0 bottom-10 flex">
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-start px-2 carousel-prev z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-left"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                            <a href="https://www.instagram.com/p/DCAgpFQPLRP/" target="_blank"
+                                class="flex-grow z-10 cursor-pointer"></a>
+                            <button
+                                class="w-16 h-full text-white/80 hover:text-white flex items-center justify-end px-2 carousel-next z-20">
+                                <span class="bg-black/50 rounded-full p-2"><i data-lucide="chevron-right"
+                                        class="w-5 h-5"></i></span>
+                            </button>
+                        </div>
+                        <div
+                            class="absolute bottom-4 w-full flex justify-center gap-1.5 carousel-dots pointer-events-none">
+                        </div>
+                    </div>
+
+                    <!-- Reels -->
+                    <a href="https://www.instagram.com/p/DTv5uuujz3d/" target="_blank"
+                        class="masonry-item rounded-lg overflow-hidden glass-panel p-2 block cursor-pointer group">
+                        <video loop muted autoplay playsinline disablePictureInPicture
+                            class="w-full h-auto rounded-md bg-black group-hover:scale-[1.02] transition-transform"
+                            src="images_to_use/Instagram_posts_videos_stories/Reels/SaveClip.App_AQMTJ2xY2kmddKBjjHX9RcFrnLjOhQMVQ0FjauoYKN3BxbQ30CqTLnRuMzqaRYE1a2QcAcDqgr4cP46Y5Z3OdNIC.mp4"></video>
+                    </a>
+                    <a href="https://www.instagram.com/p/DUzHrfgjZRr/" target="_blank"
+                        class="masonry-item rounded-lg overflow-hidden glass-panel p-2 block cursor-pointer group">
+                        <video loop muted autoplay playsinline disablePictureInPicture
+                            class="w-full h-auto rounded-md bg-black group-hover:scale-[1.02] transition-transform"
+                            src="images_to_use/Instagram_posts_videos_stories/Reels/SaveClip.App_AQN48VetHurgkG5aVruLIttqdj9Gby-9u7gNpGHdRic4lR82IuvoWoGeBpCtl6C1ufCjyKLg8AVvT-zt7w9KLf4k.mp4"></video>
+                    </a>
+                    <a href="https://www.instagram.com/p/DT1JdbTDdC8/" target="_blank"
+                        class="masonry-item rounded-lg overflow-hidden glass-panel p-2 block cursor-pointer group">
+                        <video loop muted autoplay playsinline disablePictureInPicture
+                            class="w-full h-auto rounded-md bg-black group-hover:scale-[1.02] transition-transform"
+                            src="images_to_use/Instagram_posts_videos_stories/Reels/SaveClip.App_AQPhVg8Lsu6ouyAa0xrK9zDonN2PtLd64_s1vjYGfP7Ye89H_KeV9HxAWMXei42fngKjBuBi5-BUz8wNbvFyhywc.mp4"></video>
+                    </a>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-6 glass">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2.5">
+                            <svg viewBox="0 0 24 24" class="w-full h-full">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Excellent</h3>
+                            <div class="flex gap-1 mt-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-4 h-4 fill-brand text-brand"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Review Cards -->
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    M</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Michael R.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Mobile Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"The fact that they came to
+                            my office and handled my Range Rover in the parking garage is unbelievable. The work is
+                            flawless, looked better than rolling off the showroom floor."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    S</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">Sarah T.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">At-Home Service</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"Absolute professionals. They
+                            pulled into my driveway, carefully disassembled the pillars without breaking a clip, and the
+                            new material is a perfect OEM match."</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl hover-trigger group">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-surface border border-brand/30 flex items-center justify-center font-bold text-brand font-display">
+                                    J</div>
+                                <div>
+                                    <div class="text-sm font-bold uppercase tracking-wide">James L.</div>
+                                    <div class="text-[10px] text-brand uppercase tracking-widest">Alcantara Upgrade
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i
+                                    data-lucide="star" class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i><i data-lucide="star"
+                                    class="w-3 h-3 fill-brand text-brand"></i></div>
+                        </div>
+                        <p class="text-white/70 font-light text-sm italic leading-relaxed">"I didn't have time to drop
+                            my car at a shop for 3 days. KG came to me. The Italian Alcantara upgrade completely
+                            transformed my cabin. 10/10."</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Contact -->
+    <section id="contact" class="py-32 px-6 md:px-12 bg-surface2 relative overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Left: Info -->
+                <div class="flex flex-col justify-center">
+                    <p class="text-brand tracking-[0.4em] uppercase text-xs font-bold mb-4 reveal-text flex items-center gap-2"
+                        data-i18n="contact_sub">
+                        <i data-lucide="truck" class="w-4 h-4"></i> Mobile Dispatch
+                    </p>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-8 reveal-text"
+                        data-i18n="contact_title">
+                        Book Your <br><span
+                            class="font-luxury italic text-white/80 font-light lowercase">appointment.</span>
+                    </h2>
+
+                    <p class="text-white/60 font-light leading-relaxed mb-12 max-w-md">
+                        Ready to restore your interior? Fill out the form or contact our direct dispatch line. We bring
+                        the studio to you.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6 group hover-trigger cursor-pointer"
+                            onclick="window.location.href='tel:+13213741176'">
+                            <div
+                                class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-dark group-hover:border-brand group-hover:bg-brand/10 transition-all duration-300 shadow-xl">
+                                <i data-lucide="phone-call" class="w-6 h-6 text-brand"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">Direct
+                                    Line</h4>
+                                <span
+                                    class="text-xl md:text-2xl font-display font-bold text-white group-hover:text-brand transition-colors">+1
+                                    321 374 1176</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 group hover-trigger">
+                            <div
+                                class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-dark transition-all duration-300 shadow-xl">
+                                <i data-lucide="clock" class="w-6 h-6 text-brand"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">
+                                    Operating Hours</h4>
+                                <span class="text-base font-light text-white block">Monday – Sunday</span>
+                                <span class="text-sm font-bold text-brand block">08:00 AM – 08:00 PM</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 group hover-trigger relative">
+                            <div
+                                class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-dark transition-all duration-300 shadow-xl relative z-10">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-brand"></i>
+                                <div class="absolute -top-1 -right-1 w-3 h-3 bg-brand rounded-full animate-ping"></div>
+                                <div class="absolute -top-1 -right-1 w-3 h-3 bg-brand rounded-full"></div>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">Dispatch
+                                    Zone</h4>
+                                <span class="text-base font-light text-white block">Based in Kissimmee, FL</span>
+                                <span class="text-sm font-bold text-brand block">Serving Central Florida</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div
+                    class="relative glass-panel rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-brand/10 blur-[100px] rounded-full group-hover:bg-brand/20 transition-colors duration-700 pointer-events-none">
+                    </div>
+
+                    <h3 class="text-2xl font-display font-bold uppercase tracking-wide mb-8 text-white relative z-10">
+                        Request a Quote</h3>
+
+                    <form action="https://api.web3forms.com/submit" method="POST"
+                        class="relative z-10 flex flex-col gap-6">
+                        <!-- Replace with your actual Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] uppercase tracking-widest text-white/50 font-bold ml-2">Full
+                                    Name</label>
+                                <input type="text" name="name" required placeholder="John Doe"
+                                    class="w-full bg-dark/50 border border-white/10 focus:border-brand rounded-xl px-5 py-4 text-sm text-white focus:outline-none transition-colors placeholder:text-white/20">
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] uppercase tracking-widest text-white/50 font-bold ml-2">Phone
+                                    Number</label>
+                                <input type="tel" name="phone" required placeholder="(555) 123-4567"
+                                    class="w-full bg-dark/50 border border-white/10 focus:border-brand rounded-xl px-5 py-4 text-sm text-white focus:outline-none transition-colors placeholder:text-white/20">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-white/50 font-bold ml-2">Vehicle
+                                Make & Model</label>
+                            <input type="text" name="vehicle" required placeholder="e.g. 2018 BMW 3 Series"
+                                class="w-full bg-dark/50 border border-white/10 focus:border-brand rounded-xl px-5 py-4 text-sm text-white focus:outline-none transition-colors placeholder:text-white/20">
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-white/50 font-bold ml-2">Service
+                                Needed</label>
+                            <select name="service"
+                                class="w-full bg-dark/50 border border-white/10 focus:border-brand rounded-xl px-5 py-4 text-sm text-white focus:outline-none transition-colors appearance-none cursor-pointer">
+                                <option value="Standard Headliner Restoration">Standard OEM Headliner Restoration
+                                </option>
+                                <option value="Alcantara Suede Upgrade">Premium Alcantara Suede Upgrade</option>
+                                <option value="Pillars & Sun Visors">Pillars & Sun Visors Recovery</option>
+                                <option value="Other">Other Custom Interior Work</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-white/50 font-bold ml-2">Additional
+                                Details</label>
+                            <textarea name="message" rows="3"
+                                placeholder="Describe the current condition of your vehicle..."
+                                class="w-full bg-dark/50 border border-white/10 focus:border-brand rounded-xl px-5 py-4 text-sm text-white focus:outline-none transition-colors placeholder:text-white/20 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-brand text-black font-bold uppercase tracking-widest text-sm py-5 rounded-xl hover:bg-white transition-colors duration-300 mt-2 flex items-center justify-center gap-2 group/btn">
+                            Submit Request
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-dark border-t border-white/10 text-center relative z-10">
+        <h2 class="font-display text-black/20 font-black text-[15vw] leading-[0.7] tracking-tighter m-0 uppercase footer-title overflow-hidden pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            data-i18n="footer_mobile">
+            MOBILE.
+        </h2>
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6 gap-4">
+            <div class="text-white/40 text-xs tracking-widest uppercase font-bold">&copy; 2026 KG Headliner Repair</div>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/kg_headliner/" target="_blank"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="instagram" class="w-4 h-4 inline mb-1"></i> Instagram</a>
+                <a href="https://www.facebook.com/people/KG-Headliner-Replace/100095066636657/" target="_blank"
+                    class="text-white/40 hover:text-brand transition-colors text-xs tracking-widest uppercase font-bold"><i
+                        data-lucide="facebook" class="w-4 h-4 inline mb-1"></i> Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Library Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+    <script>
+        const translations = {
+            "en": {
+                "nav_mastery": "Mastery", "nav_transformations": "Transformations", "nav_mobile": "Mobile Service", "nav_book": "Book Concierge",
+                "hero_sub": "100% Mobile Operations", "hero_title": "Restoring<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">the</span> Pinnacle.", "hero_desc": "Your time is a luxury. We are Florida's premier <strong class=\"text-white font-medium\">fully mobile</strong> studio, bringing factory-perfect headliner restoration and Alcantara upgrades directly to your driveway or dealership.", "hero_scroll": "Discover Mastery",
+                "expertise_sub": "Our Expertise", "expertise_title": "Mastery in <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">every</span> detail.", "expertise_desc": "Scroll horizontally to explore the uncompromising standards of our core services. Engineered to perfection, executed in your driveway.",
+                "service_01": "01 // Foundation", "factory_title": "Factory <br><span class=\"text-brand\">Restoration.</span>", "factory_desc": "We surgically extract the shell, strip the degraded, toxic structural foam down to the core fiberglass, and bond premium OEM fabrics using high-temp industrial adhesives.",
+                "service_02": "02 // Materials", "alcantara_title": "Alcantara <br><span class=\"text-brand\">Upgrades.</span>", "alcantara_desc": "Elevate your cabin to supercar standards. We import genuine Italian Alcantara to wrap your headliner, providing a track-focused, luxurious matte texture.",
+                "service_03": "03 // Completion", "pillars_title": "Pillars & <br><span class=\"text-brand\">Sun Visors.</span>", "pillars_desc": "A holistic restoration. We ensure your A, B, and C pillars, along with complex sunroof sliding shades and visors, are meticulously hand-stitched and recovered to match.",
+                "portfolio_sub": "The Archive", "portfolio_title": "Witness the <br><span class=\"text-brand\">Transformation.</span>", "portfolio_desc": "Select a vehicle below to view the meticulous restoration process. We turn ruined interiors back to showroom perfection.",
+                "thumb_factory": "Factory Match", "thumb_brand2": "OEM Standard", "thumb_brand3": "Premium Upgrade", "thumb_brand4": "Luxury Finish", "thumb_alcantara": "Alcantara Upgrade", "ba_after": "After", "ba_before": "Before",
+                "marquee": "WE ARE 100% MOBILE &bull; WE COME TO YOU &bull; HOME OR OFFICE &bull;",
+                "social_sub": "Real Results. Real Convenience.", "social_title": "The Studio Feed <br>& <span class=\"font-luxury italic text-white/80 font-light lowercase\">verified</span> Excellence.",
+                "ig_view": "View on Instagram", "ig_stories": "Featured Stories", "story_bts": "Behind the Scenes", "story_daily": "Daily Updates", "story_view": "View Highlight",
+                "contact_sub": "Mobile Dispatch", "contact_title": "Book Your <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">appointment.</span>", "contact_line": "Direct Line", "contact_hours": "Operating Hours", "hours_days": "Monday – Sunday", "contact_area": "Service Area Base", "area_base": "Based in Kissimmee, FL", "area_dispatch": "We dispatch directly to you.", "map_zone": "Dispatch Zone Active",
+                "footer_mobile": "MOBILE."
+            },
+            "es": {
+                "nav_mastery": "Maestría", "nav_transformations": "Transformaciones", "nav_mobile": "Servicio Móvil", "nav_book": "Reserva Concierge",
+                "hero_sub": "Operaciones 100% Móviles", "hero_title": "Restaurando<br><span class=\"font-luxury italic text-brand font-light lowercase text-[12vw] md:text-[10vw] pr-4\">el</span> Pináculo.", "hero_desc": "Tu tiempo es un lujo. Somos el principal estudio <strong class=\"text-white font-medium\">completamente móvil</strong> de Florida, llevando la restauración perfecta de techos y mejoras de Alcantara directamente a tu entrada o concesionario.", "hero_scroll": "Descubre la Maestría",
+                "expertise_sub": "Nuestra Experiencia", "expertise_title": "Maestría en <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">cada</span> detalle.", "expertise_desc": "Desplázate horizontalmente para explorar los estándares intransigentes de nuestros servicios principales. Diseñados a la perfección, ejecutados en tu entrada.",
+                "service_01": "01 // Fundación", "factory_title": "Restauración <br><span class=\"text-brand\">de Fábrica.</span>", "factory_desc": "Extraemos quirúrgicamente la carcasa, eliminamos la espuma estructural degradada hasta el núcleo de fibra de vidrio, y unimos telas OEM premium usando adhesivos industriales de alta temperatura.",
+                "service_02": "02 // Materiales", "alcantara_title": "Mejoras en <br><span class=\"text-brand\">Alcantara.</span>", "alcantara_desc": "Eleva tu cabina a los estándares de un superdeportivo. Importamos Alcantara italiano genuino para forrar tu techo, proporcionando una textura mate lujosa enfocada en la pista.",
+                "service_03": "03 // Finalización", "pillars_title": "Pilares y <br><span class=\"text-brand\">Viseras.</span>", "pillars_desc": "Una restauración integral. Nos aseguramos de que tus pilares A, B y C, junto con las persianas solares y viseras, sean meticulosamente cosidos a mano y forrados para combinar.",
+                "portfolio_sub": "El Archivo", "portfolio_title": "Testigo de la <br><span class=\"text-brand\">Transformación.</span>", "portfolio_desc": "Selecciona un vehículo a continuación para ver el proceso de restauración minucioso. Devolvemos interiores arruinados a la perfección de sala de exposición.",
+                "thumb_factory": "Fábrica Original",
+                "thumb_brand2": "Estándar OEM",
+                "thumb_brand3": "Mejora Premium",
+                "thumb_brand4": "Acabado de Lujo", "thumb_alcantara": "Mejora Alcantara", "ba_after": "Después", "ba_before": "Antes",
+                "marquee": "SOMOS 100% MÓVILES &bull; VAMOS A TI &bull; CASA U OFICINA &bull;",
+                "social_sub": "Resultados Reales. Comodidad Real.", "social_title": "Nuestro Feed <br>& Excelencia <span class=\"font-luxury italic text-white/80 font-light lowercase\">verificada</span>.",
+                "ig_view": "Ver en Instagram", "ig_stories": "Historias Destacadas", "story_bts": "Detrás de Escena", "story_daily": "Actualizaciones Diarias", "story_view": "Ver Historia",
+                "contact_sub": "Despacho Móvil", "contact_title": "Reserva Tu <br><span class=\"font-luxury italic text-white/80 font-light lowercase\">cita.</span>", "contact_line": "Línea Directa", "contact_hours": "Horario de Atención", "hours_days": "Lunes – Domingo", "contact_area": "Área de Servicio", "area_base": "Basado en Kissimmee, FL", "area_dispatch": "Despachamos directamente a ti.", "map_zone": "Zona de Despacho Activa",
+                "footer_mobile": "MÓVIL."
+            }
+        };
+
+        const updateLanguage = (lang) => {
+            const dictionary = translations[lang];
+            if (!dictionary) return;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.replace('text-white', 'text-white/40'));
+            const activeBtn = document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+            if (activeBtn) activeBtn.classList.replace('text-white/40', 'text-white');
+            document.querySelectorAll('[data-i18n]').forEach((el) => {
+                const key = el.getAttribute('data-i18n');
+                if (dictionary[key]) el.innerHTML = dictionary[key];
+            });
+            if (typeof window.SplitType !== 'undefined' && typeof window.gsap !== 'undefined') {
+                new SplitType('.premium-text-animate', { types: 'chars' });
+
+                window.gsap.fromTo('.premium-text-animate .char', { opacity: 0 }, { opacity: 1, stagger: 0.01, duration: 0.5 });
+                window.gsap.fromTo('.hero-title', { opacity: 0 }, { opacity: 1, duration: 1 });
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const preloader = document.getElementById('preloader');
+            const hideSequence = () => {
+                if (typeof window.gsap !== 'undefined') {
+                    // Preloader percentage tracking
+                    let preloaderPct = { val: 0 };
+                    const pctEl = document.getElementById('loading-pct');
+                    if (pctEl) {
+                        window.gsap.to(preloaderPct, {
+                            val: 100,
+                            duration: 2.5,
+                            ease: "power1.inOut",
+                            roundProps: "val",
+                            onUpdate: () => pctEl.innerText = preloaderPct.val + "%"
+                        });
+                    }
+
+                    window.gsap.to(preloader, {
+                        opacity: 0, duration: 1.2, ease: "power2.inOut", delay: 2.8,
+                        onComplete: () => {
+                            preloader.style.display = 'none';
+                            const subText = new SplitType('.premium-text-animate', { types: 'chars' });
+                            window.gsap.set('.premium-text-animate', { opacity: 1 }); // Ensure visibility before animating chars
+                            const tl = window.gsap.timeline();
+                            tl.fromTo('.hero-img', { scale: 1.3, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 1.5, ease: "power4.out" })
+                                .fromTo('.hero-line', { width: 0, opacity: 0 }, { width: 32, opacity: 1, duration: 1, ease: "power3.out" }, "-=1")
+                                .fromTo(subText.chars, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: "back.out(1.7)" }, "-=0.5")
+                                .fromTo('.hero-title', { y: 100, opacity: 0, rotateX: -45 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.2, ease: "expo.out" }, "-=0.8")
+                                .fromTo('.hero-desc', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8")
+                                .fromTo('.hero-scroll', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1 }, "-=0.5");
+                        }
+                    });
+                } else {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 1200);
+                }
+            };
+            hideSequence();
+
+            // Lucide Icons
+            if (window.lucide) window.lucide.createIcons();
+
+            // Lenis
+            const lenis = new window.Lenis({ duration: 1.2, smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+
+            // GSAP Plugins
+            gsap.registerPlugin(ScrollTrigger);
+            lenis.on('scroll', ScrollTrigger.update);
+
+            // Navbar scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('py-2', 'bg-dark/80', 'backdrop-blur-md');
+                    nav.classList.remove('py-6');
+                } else {
+                    nav.classList.add('py-6');
+                    nav.classList.remove('py-2', 'bg-dark/80', 'backdrop-blur-md');
+                }
+            });
+
+            // Cursor
+            const cursor = document.getElementById('cursor'), follower = document.getElementById('cursor-follower');
+            let mouseX = 0, mouseY = 0, cx = 0, cy = 0, fx = 0, fy = 0;
+            document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+            const tick = () => {
+                cx += (mouseX - cx) * 0.5; cy += (mouseY - cy) * 0.5;
+                fx += (mouseX - fx) * 0.15; fy += (mouseY - fy) * 0.15;
+                cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+                follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%)`;
+                requestAnimationFrame(tick);
+            };
+            tick();
+
+            // Magnetic
+            document.querySelectorAll('.magnetic').forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const r = el.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+                    gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.6 });
+                });
+                el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6 }));
+            });
+
+            // Horizontal Scroll
+            const sections = gsap.utils.toArray('.horizontal-panel');
+            if (sections.length > 0) {
+                gsap.to(sections, {
+                    xPercent: -100 * (sections.length - 1),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".horizontal-wrapper",
+                        pin: true,
+                        scrub: 1,
+                        end: () => "+=" + document.querySelector(".horizontal-wrapper").offsetWidth * (sections.length - 1)
+                    }
+                });
+            }
+
+            // Before/After
+            const slider = document.getElementById('ba-container'), beforeImg = document.getElementById('master-before'), afterImg = document.getElementById('master-after'), handle = document.getElementById('ba-handle');
+            if (slider) {
+                const move = (e) => {
+                    const rect = slider.getBoundingClientRect(), x = (e.clientX || e.touches[0].clientX) - rect.left;
+                    const p = Math.max(0, Math.min((x / rect.width) * 100, 100));
+                    beforeImg.style.clipPath = `polygon(0 0, ${p}% 0, ${p}% 100%, 0 100%)`;
+                    handle.style.left = `${p}%`;
+                };
+                slider.addEventListener('mousemove', move);
+                slider.addEventListener('touchmove', move);
+
+                // Thumbnail click logic
+                const thumbnails = document.querySelectorAll('#ba-thumbnails > div');
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        // Update active state
+                        thumbnails.forEach(t => {
+                            t.classList.remove('border-brand/50');
+                            t.classList.add('border-transparent');
+                        });
+                        thumb.classList.remove('border-transparent');
+                        thumb.classList.add('border-brand/50');
+
+                        // Update images
+                        const beforeSrc = thumb.getAttribute('data-before');
+                        const afterSrc = thumb.getAttribute('data-after');
+
+                        if (beforeSrc && afterSrc) {
+                            beforeImg.src = beforeSrc;
+                            afterImg.src = afterSrc;
+                        }
+                    });
+                });
+            }
+
+            // Instagram Carousel Logic
+            document.querySelectorAll('.ig-carousel').forEach(carousel => {
+                const track = carousel.querySelector('.carousel-track');
+                const prev = carousel.querySelector('.carousel-prev');
+                const next = carousel.querySelector('.carousel-next');
+                const dotsContainer = carousel.querySelector('.carousel-dots');
+                const items = track.querySelectorAll('img');
+
+                let currentIndex = 0;
+
+                // Add dots
+                items.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.className = `w-1.5 h-1.5 rounded-full transition-colors ${i === 0 ? 'bg-brand' : 'bg-white/30'}`;
+                    dotsContainer.appendChild(dot);
+                });
+
+                const updateCarousel = () => {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    Array.from(dotsContainer.children).forEach((dot, i) => {
+                        dot.className = `w-1.5 h-1.5 rounded-full transition-colors ${i === currentIndex ? 'bg-brand' : 'bg-white/30'}`;
+                    });
+
+                    // Hide arrows if out of bounds
+                    if (prev) prev.style.opacity = currentIndex === 0 ? '0' : '1';
+                    if (prev) prev.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+                    if (next) next.style.opacity = currentIndex === items.length - 1 ? '0' : '1';
+                    if (next) next.style.pointerEvents = currentIndex === items.length - 1 ? 'none' : 'auto';
+                };
+
+                if (prev) {
+                    prev.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateCarousel();
+                        }
+                    });
+                }
+
+                if (next) {
+                    next.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (currentIndex < items.length - 1) {
+                            currentIndex++;
+                            updateCarousel();
+                        }
+                    });
+                }
+
+                updateCarousel(); // Initialize state
+            });
+
+            // Language
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => updateLanguage(btn.dataset.lang)));
+        });
+    </script>
+</body>
+
+</html>
